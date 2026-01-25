@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Suszczynski | Senior Technology Leader</title>
+    <meta name="description" content="Daniel Suszczynski - CTO, Head of Engineering, and Senior Technology Leader with 19+ years of experience shaping technology environments.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-deep: #020a13;
+            --color-bg: #041525;
+            --color-bg-surface: #061c30;
+            --color-bg-elevated: #082540;
+            --color-cyan: #00d4ff;
+            --color-cyan-soft: rgba(0, 212, 255, 0.15);
+            --color-cyan-glow: rgba(0, 212, 255, 0.4);
+            --color-teal: #0891b2;
+            --color-orange: #f97316;
+            --color-text-primary: #f0f9ff;
+            --color-text-secondary: #94a3b8;
+            --color-text-muted: #64748b;
+            --color-border: rgba(0, 212, 255, 0.15);
+            --color-border-bright: rgba(0, 212, 255, 0.3);
+            --font-display: 'Outfit', -apple-system, sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2.5rem; --space-xl: 4rem; --space-2xl: 6rem;
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-display); background: var(--color-bg-deep); color: var(--color-text-primary); line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+        #network-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.6; }
+        .content-wrapper { position: relative; z-index: 1; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 var(--space-md); }
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: var(--space-sm) 0; background: rgba(2, 10, 19, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid transparent; transition: all 0.3s ease; }
+        nav.scrolled { border-color: var(--color-border); background: rgba(2, 10, 19, 0.95); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-cyan); text-decoration: none; text-shadow: 0 0 20px var(--color-cyan-glow); }
+        .nav-links { display: flex; gap: var(--space-lg); list-style: none; }
+        .nav-links a { color: var(--color-text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; position: relative; padding: 4px 0; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-cyan); box-shadow: 0 0 10px var(--color-cyan-glow); transition: width 0.3s ease; }
+        .nav-links a:hover { color: var(--color-cyan); text-shadow: 0 0 10px var(--color-cyan-glow); }
+        .nav-links a:hover::after { width: 100%; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: var(--space-2xl) 0; position: relative; }
+        .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
+        .hero-text { animation: fadeInUp 0.8s ease-out; }
+        .hero-eyebrow { display: inline-flex; align-items: center; gap: var(--space-xs); padding: 6px 14px; background: var(--color-cyan-soft); border: 1px solid var(--color-border-bright); border-radius: 100px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-cyan); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: 0.1em; }
+        .hero-eyebrow::before { content: ''; width: 8px; height: 8px; background: var(--color-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan-glow); animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.3); } }
+        .hero-title { font-size: clamp(2.75rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: var(--space-sm); }
+        .hero-title-gradient { background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-teal) 50%, var(--color-orange) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-role { font-family: var(--font-mono); font-size: 1.1rem; color: var(--color-text-muted); margin-bottom: var(--space-md); }
+        .hero-role span { color: var(--color-cyan); }
+        .hero-subtitle { font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.7; max-width: 500px; margin-bottom: var(--space-lg); }
+        .hero-cta { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: var(--space-xs); padding: 0.875rem 1.75rem; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-teal) 100%); color: var(--color-bg-deep); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4); }
+        .btn-secondary { background: transparent; color: var(--color-text-primary); border: 1px solid var(--color-border-bright); }
+        .btn-secondary:hover { background: var(--color-cyan-soft); border-color: var(--color-cyan); box-shadow: 0 0 20px var(--color-cyan-glow); }
+        .hero-image-wrapper { position: relative; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        .hero-image-container { position: relative; width: 100%; max-width: 380px; margin-left: auto; }
+        .hero-image-frame { position: absolute; inset: -3px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--color-cyan), var(--color-teal), var(--color-orange)); opacity: 0.8; z-index: 0; }
+        .hero-image-glow { position: absolute; inset: -40px; background: radial-gradient(circle, var(--color-cyan-glow) 0%, transparent 70%); z-index: -1; animation: glowPulse 4s ease-in-out infinite; }
+        @keyframes glowPulse { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.05); } }
+        .hero-image { position: relative; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius-lg); z-index: 1; }
+        .hero-stats { position: absolute; bottom: -25px; left: -25px; display: flex; gap: var(--space-sm); z-index: 2; }
+        .stat-card { background: rgba(4, 21, 37, 0.9); border: 1px solid var(--color-border-bright); border-radius: var(--radius-md); padding: var(--space-sm) var(--space-md); backdrop-filter: blur(20px); }
+        .stat-value { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-cyan); text-shadow: 0 0 20px var(--color-cyan-glow); }
+        .stat-label { font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .hero-nodes { position: absolute; top: 20px; right: -30px; display: flex; flex-direction: column; gap: 15px; z-index: 2; }
+        .node { width: 12px; height: 12px; border-radius: 50%; background: var(--color-cyan); box-shadow: 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan-glow); position: relative; }
+        .node::before { content: ''; position: absolute; top: 50%; right: 100%; width: 30px; height: 1px; background: linear-gradient(to left, var(--color-cyan), transparent); }
+        .node:nth-child(2) { background: var(--color-orange); box-shadow: 0 0 10px var(--color-orange), 0 0 20px rgba(249, 115, 22, 0.4); margin-left: 20px; }
+        .node:nth-child(3) { background: var(--color-teal); box-shadow: 0 0 10px var(--color-teal), 0 0 20px rgba(8, 145, 178, 0.4); margin-left: 10px; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        section { padding: var(--space-2xl) 0; position: relative; }
+        .section-header { margin-bottom: var(--space-xl); }
+        .section-eyebrow { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-cyan); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: var(--space-xs); text-shadow: 0 0 10px var(--color-cyan-glow); }
+        .section-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; }
+        .section-divider { height: 1px; background: linear-gradient(to right, transparent, var(--color-border-bright), transparent); margin: 0; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+        .about-text p { color: var(--color-text-secondary); margin-bottom: var(--space-md); font-size: 1rem; }
+        .about-text p:first-of-type { font-size: 1.15rem; color: var(--color-text-primary); }
+        .expertise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
+        .expertise-item { background: rgba(6, 28, 48, 0.6); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-md); transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .expertise-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--color-cyan), var(--color-teal)); opacity: 0; transition: opacity 0.3s ease; }
+        .expertise-item:hover { border-color: var(--color-cyan); transform: translateY(-3px); box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1); }
+        .expertise-item:hover::before { opacity: 1; }
+        .expertise-icon { width: 44px; height: 44px; background: var(--color-cyan-soft); border: 1px solid var(--color-border); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-sm); color: var(--color-cyan); }
+        .expertise-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+        .expertise-desc { font-size: 0.8rem; color: var(--color-text-muted); }
+        .timeline { position: relative; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--color-cyan), var(--color-teal), var(--color-orange), transparent); }
+        .timeline-item { position: relative; padding-left: var(--space-xl); padding-bottom: var(--space-xl); }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-dot { position: absolute; left: -7px; top: 6px; width: 16px; height: 16px; background: var(--color-bg-deep); border: 2px solid var(--color-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan-glow); }
+        .timeline-item:nth-child(2) .timeline-dot { border-color: var(--color-teal); box-shadow: 0 0 10px var(--color-teal); }
+        .timeline-item:nth-child(3) .timeline-dot { border-color: var(--color-orange); box-shadow: 0 0 10px var(--color-orange); }
+        .timeline-company { display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-xs); flex-wrap: wrap; }
+        .timeline-company-name { font-size: 1.4rem; font-weight: 700; }
+        .timeline-company-location { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted); padding: 4px 12px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 100px; }
+        .timeline-role { font-weight: 600; color: var(--color-cyan); margin-bottom: 4px; }
+        .timeline-period { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: var(--space-sm); }
+        .timeline-description { color: var(--color-text-secondary); font-size: 0.95rem; margin-bottom: var(--space-sm); }
+        .timeline-highlights { display: flex; flex-wrap: wrap; gap: 8px; }
+        .highlight-tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 5px 12px; background: var(--color-cyan-soft); border: 1px solid var(--color-border); border-radius: 100px; color: var(--color-cyan); transition: all 0.2s ease; }
+        .highlight-tag:hover { border-color: var(--color-cyan); box-shadow: 0 0 10px var(--color-cyan-glow); }
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+        .skill-card { background: rgba(6, 28, 48, 0.5); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-lg); transition: all 0.3s ease; }
+        .skill-card:hover { border-color: var(--color-border-bright); background: rgba(6, 28, 48, 0.8); }
+        .skill-card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: var(--space-sm); }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .skill-tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 6px 12px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-text-secondary); transition: all 0.2s ease; }
+        .skill-tag:hover { color: var(--color-cyan); border-color: var(--color-cyan); background: var(--color-cyan-soft); }
+        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: start; }
+        .contact-text { font-size: 1.05rem; color: var(--color-text-secondary); margin-bottom: var(--space-lg); }
+        .contact-links { display: flex; flex-direction: column; gap: var(--space-sm); }
+        .contact-link { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-md); background: rgba(6, 28, 48, 0.5); border: 1px solid var(--color-border); border-radius: var(--radius-md); text-decoration: none; color: var(--color-text-primary); transition: all 0.3s ease; }
+        .contact-link:hover { border-color: var(--color-cyan); transform: translateX(8px); box-shadow: 0 0 30px rgba(0, 212, 255, 0.15); }
+        .contact-link-icon { width: 48px; height: 48px; background: var(--color-cyan-soft); border: 1px solid var(--color-border); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--color-cyan); transition: all 0.3s ease; }
+        .contact-link:hover .contact-link-icon { background: var(--color-cyan); color: var(--color-bg-deep); box-shadow: 0 0 20px var(--color-cyan-glow); }
+        .contact-link-text { flex: 1; }
+        .contact-link-label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .contact-link-value { font-weight: 500; }
+        .contact-link-arrow { color: var(--color-text-muted); font-family: var(--font-mono); transition: all 0.2s ease; }
+        .contact-link:hover .contact-link-arrow { transform: translateX(4px); color: var(--color-cyan); }
+        .contact-card { background: linear-gradient(135deg, rgba(6, 28, 48, 0.8), rgba(8, 37, 64, 0.8)); border: 1px solid var(--color-border-bright); border-radius: var(--radius-lg); padding: var(--space-xl); position: relative; overflow: hidden; }
+        .contact-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200px; height: 200px; background: radial-gradient(circle, var(--color-cyan-glow) 0%, transparent 70%); animation: glowPulse 4s ease-in-out infinite; }
+        .contact-card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: var(--space-xs); position: relative; }
+        .contact-card-subtitle { color: var(--color-text-muted); margin-bottom: var(--space-lg); position: relative; }
+        .contact-card p { color: var(--color-text-secondary); font-size: 0.95rem; margin-bottom: var(--space-sm); position: relative; }
+        .contact-card strong { color: var(--color-cyan); }
+        footer { border-top: 1px solid var(--color-border); padding: var(--space-lg) 0; margin-top: var(--space-xl); }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        .footer-text { font-size: 0.85rem; color: var(--color-text-muted); }
+        .footer-social { display: flex; gap: var(--space-sm); }
+        .social-link { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-text-secondary); text-decoration: none; transition: all 0.3s ease; }
+        .social-link:hover { border-color: var(--color-cyan); color: var(--color-cyan); box-shadow: 0 0 20px var(--color-cyan-glow); }
+        @media (max-width: 900px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-subtitle { margin-left: auto; margin-right: auto; }
+            .hero-cta { justify-content: center; }
+            .hero-image-container { max-width: 280px; margin: 0 auto; }
+            .hero-stats { position: relative; bottom: 0; left: 0; justify-content: center; margin-top: var(--space-md); }
+            .hero-nodes { display: none; }
+            .about-content, .contact-content { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 600px) {
+            .expertise-grid { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; gap: var(--space-md); text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="network-canvas"></canvas>
+    <div class="content-wrapper">
+        <nav id="nav">
+            <div class="container nav-content">
+                <a href="#" class="nav-logo">&lt;DS/&gt;</a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <span class="hero-eyebrow">Available for new opportunities</span>
+                        <h1 class="hero-title"><span class="hero-title-gradient">Daniel Suszczynski</span></h1>
+                        <p class="hero-role"><span>&gt;</span> Senior Technology Leader _ CTO _ Head of Engineering</p>
+                        <p class="hero-subtitle">Transforming organizations through modern leadership and technical excellence. 19+ years creating synergies between technology and business for startups, scaleups, and enterprises.</p>
+                        <div class="hero-cta">
+                            <a href="#contact" class="btn btn-primary"><span>Get in touch</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                            <a href="#experience" class="btn btn-secondary">View experience</a>
+                        </div>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <div class="hero-image-container">
+                            <div class="hero-image-glow"></div>
+                            <div class="hero-image-frame"></div>
+                            <img src="photo.jpg" alt="Daniel Suszczynski" class="hero-image" onerror="this.src='https://via.placeholder.com/380x475/041525/00d4ff?text=DS'">
+                            <div class="hero-stats">
+                                <div class="stat-card"><div class="stat-value">19+</div><div class="stat-label">Years Experience</div></div>
+                                <div class="stat-card"><div class="stat-value">35+</div><div class="stat-label">Team Size Led</div></div>
+                            </div>
+                            <div class="hero-nodes"><div class="node"></div><div class="node"></div><div class="node"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <div class="section-header">
+                            <p class="section-eyebrow">// About Me</p>
+                            <h2 class="section-title">Driving Innovation Through Technical Excellence</h2>
+                        </div>
+                        <p>I transform and develop organisations, creating highly performing collaborations between technology and business on tactical and strategic levels.</p>
+                        <p>I have worked for startups, scaleups, and software houses, bringing profound experience in full-stack software engineering and modern leadership. I look for real-life challenges to drive innovation in a highly effective and performance-oriented approach.</p>
+                        <p>My expertise spans AI and machine learning enhancement, technical transformation from critical technical debt to innovative modern organisations, Post-Merger Integration, rapid organisational growth, and gaining market share in competitive environments.</p>
+                    </div>
+                    <div class="expertise-grid">
+                        <div class="expertise-item">
+                            <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                            <div class="expertise-title">Technical Strategy</div>
+                            <div class="expertise-desc">Aligning technology with business goals</div>
+                        </div>
+                        <div class="expertise-item">
+                            <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+                            <div class="expertise-title">Team Leadership</div>
+                            <div class="expertise-desc">Building high-performing teams</div>
+                        </div>
+                        <div class="expertise-item">
+                            <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+                            <div class="expertise-title">Domain-Driven Design</div>
+                            <div class="expertise-desc">Event Storming & Clean Architecture</div>
+                        </div>
+                        <div class="expertise-item">
+                            <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+                            <div class="expertise-title">Legacy Modernization</div>
+                            <div class="expertise-desc">Monolith to microservices</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="experience">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-eyebrow">// Career Journey</p>
+                    <h2 class="section-title">Professional Experience</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-company"><span class="timeline-company-name">FinCompare</span><span class="timeline-company-location">Berlin, Germany</span></div>
+                        <div class="timeline-role">Head of Technology (Interim CTO)</div>
+                        <div class="timeline-period">May 2023 – May 2025 · Reporting to CEO/COO</div>
+                        <p class="timeline-description">Led the transformation of the technology organisation by implementing Team Topologies and DDD. Managed 30+ professionals across software engineering, AWS infrastructure, data warehousing, and IT security. Achieved highest DORA metrics standards within 7 months.</p>
+                        <div class="timeline-highlights"><span class="highlight-tag">Team Topologies</span><span class="highlight-tag">DDD</span><span class="highlight-tag">AWS</span><span class="highlight-tag">DORA Metrics</span><span class="highlight-tag">ISO-27001</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-company"><span class="timeline-company-name">Smava</span><span class="timeline-company-location">Berlin, Germany</span></div>
+                        <div class="timeline-role">Director of Software Engineering</div>
+                        <div class="timeline-period">January 2021 – April 2023 · Reporting to CTO</div>
+                        <p class="timeline-description">Led core business domain with six cross-functional teams (35+ professionals). Managed complex data migration from on-premises to cloud-based systems. Played key role in Post-Merger Integration and Cloud Migration (AWS) projects.</p>
+                        <div class="timeline-highlights"><span class="highlight-tag">Post-Merger Integration</span><span class="highlight-tag">Cloud Migration</span><span class="highlight-tag">Microservices</span><span class="highlight-tag">CCOE</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-company"><span class="timeline-company-name">Smava</span><span class="timeline-company-location">Berlin, Germany</span></div>
+                        <div class="timeline-role">Head of Software Engineering</div>
+                        <div class="timeline-period">October 2016 – December 2020 · Reporting to CTO</div>
+                        <p class="timeline-description">Introduced Domain-Driven Design at smava. Successfully implemented machine learning into applications. Led Backend Foundation group for 60+ engineers, converting technical ideas into actionable OKRs.</p>
+                        <div class="timeline-highlights"><span class="highlight-tag">DDD</span><span class="highlight-tag">Machine Learning</span><span class="highlight-tag">OKRs</span><span class="highlight-tag">Team Building</span></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-company"><span class="timeline-company-name">Earlier Roles</span><span class="timeline-company-location">Germany / Poland</span></div>
+                        <div class="timeline-role">Full Stack Software Engineer</div>
+                        <div class="timeline-period">September 2005 – February 2014</div>
+                        <p class="timeline-description">Progressive career from junior developer to senior full-stack engineer at companies including HRS, Devinitim, and IPO S.A. Delivered 15+ full-stack projects and led development of scalable platforms.</p>
+                        <div class="timeline-highlights"><span class="highlight-tag">Java</span><span class="highlight-tag">PHP</span><span class="highlight-tag">Full Stack</span><span class="highlight-tag">E-learning</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-eyebrow">// Expertise</p>
+                    <h2 class="section-title">Skills & Technologies</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card"><h3 class="skill-card-title">Leadership</h3><div class="skill-tags"><span class="skill-tag">Servant Leadership</span><span class="skill-tag">OKRs</span><span class="skill-tag">Team Topologies</span><span class="skill-tag">Lean Product Dev</span><span class="skill-tag">Agile</span><span class="skill-tag">Hiring & Talent</span></div></div>
+                    <div class="skill-card"><h3 class="skill-card-title">Architecture</h3><div class="skill-tags"><span class="skill-tag">Domain-Driven Design</span><span class="skill-tag">Event Storming</span><span class="skill-tag">Microservices</span><span class="skill-tag">Event-driven</span><span class="skill-tag">C4 Model</span><span class="skill-tag">Context Mapping</span></div></div>
+                    <div class="skill-card"><h3 class="skill-card-title">Technologies</h3><div class="skill-tags"><span class="skill-tag">AWS</span><span class="skill-tag">GoLang</span><span class="skill-tag">Python</span><span class="skill-tag">Java / Kotlin</span><span class="skill-tag">TypeScript</span><span class="skill-tag">React</span></div></div>
+                    <div class="skill-card"><h3 class="skill-card-title">Infrastructure</h3><div class="skill-tags"><span class="skill-tag">Kubernetes</span><span class="skill-tag">Terraform</span><span class="skill-tag">Crossplane</span><span class="skill-tag">Argo CD</span><span class="skill-tag">CI/CD</span><span class="skill-tag">IaC</span></div></div>
+                    <div class="skill-card"><h3 class="skill-card-title">Data & Integration</h3><div class="skill-tags"><span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">gRPC</span><span class="skill-tag">REST</span><span class="skill-tag">NATS</span><span class="skill-tag">Debezium / CDC</span></div></div>
+                    <div class="skill-card"><h3 class="skill-card-title">Security & Compliance</h3><div class="skill-tags"><span class="skill-tag">ISMS</span><span class="skill-tag">ISO-27001</span><span class="skill-tag">DORA Metrics</span><span class="skill-tag">IT Security</span></div></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <div>
+                        <div class="section-header">
+                            <p class="section-eyebrow">// Get in Touch</p>
+                            <h2 class="section-title">Let's Build Something Great</h2>
+                        </div>
+                        <p class="contact-text">I'm always interested in discussing new opportunities, challenging projects, and ways to drive innovation through technology leadership.</p>
+                        <div class="contact-links">
+                            <a href="mailto:daniel@suszczynski.dev" class="contact-link">
+                                <div class="contact-link-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                                <div class="contact-link-text"><div class="contact-link-label">Email</div><div class="contact-link-value">daniel@suszczynski.dev</div></div>
+                                <span class="contact-link-arrow">→</span>
+                            </a>
+                            <a href="tel:+4917698622917" class="contact-link">
+                                <div class="contact-link-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+                                <div class="contact-link-text"><div class="contact-link-label">Phone</div><div class="contact-link-value">+49 176 986 22 917</div></div>
+                                <span class="contact-link-arrow">→</span>
+                            </a>
+                            <a href="https://linkedin.com/in/suszczynski" target="_blank" rel="noopener" class="contact-link">
+                                <div class="contact-link-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+                                <div class="contact-link-text"><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/suszczynski</div></div>
+                                <span class="contact-link-arrow">→</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <h3 class="contact-card-title">Looking for a Technology Leader?</h3>
+                        <p class="contact-card-subtitle">I'm open to CTO, VP of Engineering, and Head of Technology roles.</p>
+                        <p>With experience in fintech, startups, and scaleups, I bring a proven track record of transforming organizations and building high-performing teams.</p>
+                        <p><strong>Location:</strong> Berlin, Germany<br><strong>Languages:</strong> English (fluent), German (working), Polish (native)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container footer-content">
+                <p class="footer-text">© 2026 Daniel Suszczynski. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="https://linkedin.com/in/suszczynski" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+                    <a href="mailto:daniel@suszczynski.dev" class="social-link" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+                    <a href="https://github.com/suszczynski" target="_blank" rel="noopener" class="social-link" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, nodes = [], mouse = { x: null, y: null };
+        const config = { nodeCount: 80, connectionDistance: 150, nodeSpeed: 0.3, colors: { cyan: '#00d4ff', teal: '#0891b2', orange: '#f97316' } };
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        function createNodes() {
+            nodes = [];
+            for (let i = 0; i < config.nodeCount; i++) {
+                const colorKeys = Object.keys(config.colors);
+                nodes.push({ x: Math.random() * width, y: Math.random() * height, vx: (Math.random() - 0.5) * config.nodeSpeed, vy: (Math.random() - 0.5) * config.nodeSpeed, radius: Math.random() * 2 + 1, color: config.colors[colorKeys[Math.floor(Math.random() * colorKeys.length)]] });
+            }
+        }
+        function drawNode(node) {
+            ctx.beginPath(); ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2); ctx.fillStyle = node.color; ctx.fill();
+            ctx.shadowBlur = 15; ctx.shadowColor = node.color; ctx.fill(); ctx.shadowBlur = 0;
+        }
+        function drawConnections() {
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < config.connectionDistance) {
+                        ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(0, 212, 255, ${(1 - distance / config.connectionDistance) * 0.5})`; ctx.lineWidth = 0.5; ctx.stroke();
+                    }
+                }
+            }
+        }
+        function updateNodes() {
+            nodes.forEach(node => {
+                node.x += node.vx; node.y += node.vy;
+                if (node.x < 0 || node.x > width) node.vx *= -1;
+                if (node.y < 0 || node.y > height) node.vy *= -1;
+                if (mouse.x && mouse.y) {
+                    const dx = node.x - mouse.x, dy = node.y - mouse.y, distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) { node.x += dx * 0.02; node.y += dy * 0.02; }
+                }
+            });
+        }
+        function animate() { ctx.clearRect(0, 0, width, height); drawConnections(); nodes.forEach(drawNode); updateNodes(); requestAnimationFrame(animate); }
+        resize(); createNodes(); animate();
+        window.addEventListener('resize', () => { resize(); createNodes(); });
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+        });
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } }); }, { threshold: 0.1 });
+        document.querySelectorAll('.timeline-item, .skill-card, .expertise-item').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(el); });
+    </script>
+</body>
+</html>
