@@ -66,7 +66,7 @@
         .hero-image-frame { position: absolute; inset: -3px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--color-cyan), var(--color-teal), var(--color-orange)); opacity: 0.8; z-index: 0; }
         .hero-image-glow { position: absolute; inset: -40px; background: radial-gradient(circle, var(--color-cyan-glow) 0%, transparent 70%); z-index: -1; animation: glowPulse 4s ease-in-out infinite; }
         @keyframes glowPulse { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.05); } }
-        .hero-image { position: relative; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: var(--radius-lg); z-index: 1; }
+        .hero-image { position: relative; width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: var(--radius-lg); z-index: 1; }
         .hero-stats { position: absolute; bottom: -25px; left: -25px; display: flex; gap: var(--space-sm); z-index: 2; }
         .stat-card { background: rgba(4, 21, 37, 0.9); border: 1px solid var(--color-border-bright); border-radius: var(--radius-md); padding: var(--space-sm) var(--space-md); backdrop-filter: blur(20px); }
         .stat-value { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-cyan); text-shadow: 0 0 20px var(--color-cyan-glow); }
@@ -189,7 +189,7 @@
                         <div class="hero-image-container">
                             <div class="hero-image-glow"></div>
                             <div class="hero-image-frame"></div>
-                            <img src="photo.jpg" alt="Daniel Suszczynski" class="hero-image" onerror="this.src='https://via.placeholder.com/380x475/041525/00d4ff?text=DS'">
+                            <img src="photo.jpg" alt="Daniel Suszczynski" class="hero-image">
                             <div class="hero-stats">
                                 <div class="stat-card"><div class="stat-value">19+</div><div class="stat-label">Years Experience</div></div>
                                 <div class="stat-card"><div class="stat-value">35+</div><div class="stat-label">Team Size Led</div></div>
@@ -320,11 +320,6 @@
                             <a href="mailto:daniel@suszczynski.dev" class="contact-link">
                                 <div class="contact-link-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
                                 <div class="contact-link-text"><div class="contact-link-label">Email</div><div class="contact-link-value">daniel@suszczynski.dev</div></div>
-                                <span class="contact-link-arrow">→</span>
-                            </a>
-                            <a href="tel:+4917698622917" class="contact-link">
-                                <div class="contact-link-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
-                                <div class="contact-link-text"><div class="contact-link-label">Phone</div><div class="contact-link-value">+49 176 986 22 917</div></div>
                                 <span class="contact-link-arrow">→</span>
                             </a>
                             <a href="https://linkedin.com/in/suszczynski" target="_blank" rel="noopener" class="contact-link">
