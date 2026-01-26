@@ -1,0 +1,194 @@
+---
+layout: default
+no_canvas: true
+---
+<style>
+    body { overflow-x: hidden; }
+    
+    /* Slide Progress */
+    .slide-progress { position: fixed; top: 60px; left: 0; right: 0; z-index: 99; padding: var(--space-sm) var(--space-md); background: rgba(4, 21, 37, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-border); }
+    .progress-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: var(--space-md); }
+    .progress-bar { flex: 1; height: 4px; background: var(--color-bg-elevated); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--color-cyan), var(--color-teal)); transition: width 0.3s ease; }
+    .progress-text { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted); min-width: 80px; text-align: right; }
+    
+    /* Slides Container */
+    .slides-container { display: flex; transition: transform 0.5s ease; padding-top: 110px; }
+    .slide { min-width: 100vw; min-height: calc(100vh - 110px); display: flex; flex-direction: column; }
+    
+    /* Slide Header */
+    .slide-header { padding: var(--space-lg) var(--space-md); background: var(--color-bg-surface); border-bottom: 1px solid var(--color-border); }
+    .slide-header-inner { max-width: 1000px; margin: 0 auto; }
+    .slide-number { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-orange); margin-bottom: var(--space-xs); }
+    .slide-title { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: var(--space-xs); }
+    .slide-subtitle { font-size: 1.1rem; color: var(--color-text-secondary); }
+    
+    /* Slide Content */
+    .slide-content { flex: 1; overflow-y: auto; padding: var(--space-lg) var(--space-md); }
+    .slide-content-inner { max-width: 1000px; margin: 0 auto; }
+    
+    /* Content Sections */
+    .content-section { margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border); }
+    .content-section:last-child { border-bottom: none; }
+    .section-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-cyan); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-sm); }
+    .section-title { font-size: 1.4rem; font-weight: 600; margin-bottom: var(--space-md); }
+    .section-content { color: var(--color-text-secondary); font-size: 1rem; line-height: 1.8; }
+    .section-content p { margin-bottom: var(--space-md); }
+    .section-content ul { padding-left: var(--space-lg); margin-bottom: var(--space-md); }
+    .section-content li { margin-bottom: var(--space-xs); }
+    .section-content strong { color: var(--color-text-primary); }
+    .section-content a { color: var(--color-cyan); }
+    
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md); margin: var(--space-lg) 0; }
+    .stat-card { background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-lg); text-align: center; }
+    .stat-value { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700; color: var(--color-cyan); text-shadow: 0 0 30px var(--color-cyan-glow); }
+    .stat-label { font-size: 0.85rem; color: var(--color-text-muted); margin-top: var(--space-xs); }
+    
+    /* Timeline */
+    .timeline { position: relative; padding-left: var(--space-lg); }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--color-cyan), var(--color-orange)); }
+    .timeline-item { position: relative; padding-bottom: var(--space-lg); }
+    .timeline-item::before { content: ''; position: absolute; left: calc(-1 * var(--space-lg) - 5px); top: 4px; width: 12px; height: 12px; background: var(--color-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--color-cyan); }
+    .timeline-item:nth-child(even)::before { background: var(--color-orange); box-shadow: 0 0 10px var(--color-orange); }
+    .timeline-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: var(--space-xs); }
+    .timeline-title { font-weight: 600; margin-bottom: var(--space-xs); }
+    .timeline-desc { font-size: 0.9rem; color: var(--color-text-secondary); }
+    
+    /* Highlight Box */
+    .highlight-box { background: var(--color-cyan-soft); border: 1px solid var(--color-border-bright); border-radius: var(--radius-md); padding: var(--space-md); margin: var(--space-lg) 0; }
+    .highlight-title { font-weight: 600; color: var(--color-cyan); margin-bottom: var(--space-xs); }
+    
+    /* Navigation */
+    .nav-arrows { position: fixed; bottom: var(--space-lg); right: var(--space-lg); display: flex; gap: var(--space-sm); z-index: 100; }
+    .nav-arrow { width: 50px; height: 50px; border-radius: 50%; background: var(--color-bg-surface); border: 1px solid var(--color-border); color: var(--color-text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; }
+    .nav-arrow:hover:not(:disabled) { background: var(--color-cyan); color: var(--color-bg-deep); border-color: var(--color-cyan); box-shadow: 0 0 20px var(--color-cyan-glow); }
+    .nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+    .nav-arrow svg { width: 24px; height: 24px; }
+    
+    .slide-dots { position: fixed; bottom: var(--space-lg); left: 50%; transform: translateX(-50%); display: flex; gap: var(--space-sm); z-index: 100; }
+    .slide-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--color-bg-elevated); border: 1px solid var(--color-border); cursor: pointer; transition: all 0.3s ease; }
+    .slide-dot.active { background: var(--color-cyan); border-color: var(--color-cyan); box-shadow: 0 0 10px var(--color-cyan); }
+    .slide-dot:hover { border-color: var(--color-cyan); }
+    
+    .keyboard-hints { position: fixed; bottom: var(--space-lg); left: var(--space-lg); display: flex; gap: var(--space-md); z-index: 100; }
+    .key-hint { display: flex; align-items: center; gap: var(--space-xs); font-size: 0.75rem; color: var(--color-text-muted); }
+    .key { font-family: var(--font-mono); padding: 2px 8px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.7rem; }
+    
+    .scroll-indicator { display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); padding: var(--space-md); color: var(--color-text-muted); font-size: 0.8rem; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+    .scroll-indicator svg { width: 24px; height: 24px; }
+    
+    @media (max-width: 768px) {
+        .keyboard-hints { display: none; }
+        .nav-arrows { bottom: var(--space-md); right: var(--space-md); }
+        .slide-dots { bottom: calc(var(--space-md) + 60px); }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+</style>
+
+<div class="slide-progress">
+    <div class="progress-container">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-text" id="progressText">1 / {{ page.slides | size }}</div>
+    </div>
+</div>
+
+<div class="slides-container" id="slidesContainer">
+    {% for slide in page.slides %}
+    <div class="slide" data-slide="{{ forloop.index }}">
+        <div class="slide-header">
+            <div class="slide-header-inner">
+                <div class="slide-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }} / {{ slide.label }}</div>
+                <h1 class="slide-title">{{ slide.title }}</h1>
+                <p class="slide-subtitle">{{ slide.subtitle }}</p>
+            </div>
+        </div>
+        <div class="slide-content">
+            <div class="slide-content-inner">
+                {{ slide.content | markdownify }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="slide-dots" id="slideDots"></div>
+
+<div class="nav-arrows">
+    <button class="nav-arrow" id="prevBtn" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="nav-arrow" id="nextBtn" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+</div>
+
+<div class="keyboard-hints">
+    <div class="key-hint"><span class="key">←</span><span class="key">→</span> Navigate slides</div>
+    <div class="key-hint"><span class="key">↑</span><span class="key">↓</span> Scroll details</div>
+</div>
+
+<script>
+    const slidesContainer = document.getElementById('slidesContainer');
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+
+    // Create dots
+    const dotsContainer = document.getElementById('slideDots');
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+    });
+
+    function safeUpdateHistory(url) {
+        try { history.replaceState(null, null, url); } catch (e) { }
+    }
+
+    function updateUI() {
+        slidesContainer.style.transform = `translateX(-${currentSlide * 100}vw)`;
+        document.getElementById('progressFill').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+        document.getElementById('progressText').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        document.querySelectorAll('.slide-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlide);
+        });
+        document.getElementById('prevBtn').disabled = currentSlide === 0;
+        document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        safeUpdateHistory(`#slide-${currentSlide + 1}`);
+    }
+
+    function goToSlide(index) {
+        currentSlide = Math.max(0, Math.min(totalSlides - 1, index));
+        updateUI();
+    }
+
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+
+    document.getElementById('nextBtn').addEventListener('click', nextSlide);
+    document.getElementById('prevBtn').addEventListener('click', prevSlide);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    let touchStartX = 0;
+    slidesContainer.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    slidesContainer.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextSlide();
+            else prevSlide();
+        }
+    });
+
+    const hash = window.location.hash;
+    if (hash.startsWith('#slide-')) {
+        const slideNum = parseInt(hash.replace('#slide-', '')) - 1;
+        if (slideNum >= 0 && slideNum < totalSlides) currentSlide = slideNum;
+    }
+    updateUI();
+</script>
