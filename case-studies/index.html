@@ -1,0 +1,62 @@
+---
+layout: default
+title: Case Studies
+description: Real-world case studies of technology transformation, team restructuring, and engineering excellence.
+permalink: /case-studies/
+---
+<style>
+    .case-studies-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); padding-bottom: var(--space-2xl); }
+    .case-study-card { background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: inherit; transition: all 0.3s ease; display: flex; flex-direction: column; }
+    .case-study-card:hover { border-color: var(--color-cyan); transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0, 212, 255, 0.15); }
+    .case-study-visual { height: 200px; background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-surface)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .case-study-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, var(--color-cyan-soft) 0%, transparent 50%); }
+    .case-study-visual svg { width: 64px; height: 64px; color: var(--color-cyan); opacity: 0.6; position: relative; z-index: 1; }
+    .case-study-content { padding: var(--space-lg); flex: 1; display: flex; flex-direction: column; }
+    .case-study-category { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-xs); }
+    .case-study-title { font-size: 1.3rem; font-weight: 600; margin-bottom: var(--space-sm); line-height: 1.3; }
+    .case-study-excerpt { color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; flex: 1; }
+    .case-study-meta { display: flex; gap: var(--space-md); margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-border); }
+    .case-study-stat-value { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--color-cyan); }
+    .case-study-stat-label { font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase; }
+    .case-study-cta { display: inline-flex; align-items: center; gap: var(--space-xs); color: var(--color-cyan); font-weight: 500; margin-top: var(--space-md); }
+    .case-study-card:hover .case-study-cta { gap: var(--space-sm); }
+    @media (max-width: 768px) { .case-studies-grid { grid-template-columns: 1fr; } }
+</style>
+
+<header class="page-header">
+    <div class="container">
+        <p class="section-eyebrow">// Real-world Solutions</p>
+        <h1 class="page-title">Case Studies</h1>
+        <p class="page-description">Deep dives into technology transformations, organizational changes, and engineering challenges I've tackled throughout my career.</p>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="case-studies-grid">
+            {% for case_study in site.case_studies %}
+            <a href="{{ case_study.url | relative_url }}" class="case-study-card animate-on-scroll">
+                <div class="case-study-visual">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-category">{{ case_study.category }}</div>
+                    <h2 class="case-study-title">{{ case_study.title }}</h2>
+                    <p class="case-study-excerpt">{{ case_study.excerpt | strip_html | truncate: 150 }}</p>
+                    {% if case_study.stats %}
+                    <div class="case-study-meta">
+                        {% for stat in case_study.stats %}
+                        <div class="case-study-stat">
+                            <div class="case-study-stat-value">{{ stat.value }}</div>
+                            <div class="case-study-stat-label">{{ stat.label }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <span class="case-study-cta">View case study →</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</main>
