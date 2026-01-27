@@ -1,0 +1,49 @@
+---
+layout: default
+title: Articles
+description: Thoughts on technology leadership, Domain-Driven Design, Team Topologies, and building high-performing teams.
+permalink: /articles/
+---
+<style>
+    .articles-list { padding-bottom: var(--space-2xl); }
+    .article-item { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-lg); padding: var(--space-lg) 0; border-bottom: 1px solid var(--color-border); text-decoration: none; color: inherit; transition: all 0.3s ease; }
+    .article-item:hover { background: rgba(0, 212, 255, 0.02); }
+    .article-item:hover .article-title { color: var(--color-cyan); }
+    .article-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: var(--space-xs); }
+    .article-read-time { font-size: 0.8rem; color: var(--color-text-muted); }
+    .article-title { font-size: 1.4rem; font-weight: 600; margin-bottom: var(--space-xs); transition: color 0.3s ease; }
+    .article-excerpt { color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--space-sm); }
+    .article-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .article-tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 4px 10px; background: var(--color-cyan-soft); border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-cyan); }
+    @media (max-width: 768px) { .article-item { grid-template-columns: 1fr; gap: var(--space-sm); } }
+</style>
+
+<header class="page-header">
+    <div class="container">
+        <p class="section-eyebrow">// Insights & Knowledge</p>
+        <h1 class="page-title">Articles</h1>
+        <p class="page-description">Thoughts on technology leadership, engineering culture, Domain-Driven Design, and building high-performing teams.</p>
+    </div>
+</header>
+
+<main class="articles-list">
+    <div class="container">
+        {% for article in site.articles %}
+        <a href="{{ article.url | relative_url }}" class="article-item animate-on-scroll">
+            <div class="article-meta">
+                <div class="article-date">{{ article.date | date: "%B %d, %Y" }}</div>
+                {% if article.read_time %}<div class="article-read-time">{{ article.read_time }} min read</div>{% endif %}
+            </div>
+            <div class="article-content">
+                <h2 class="article-title">{{ article.title }}</h2>
+                <p class="article-excerpt">{{ article.excerpt | strip_html | truncate: 200 }}</p>
+                {% if article.tags %}
+                <div class="article-tags">
+                    {% for tag in article.tags %}<span class="article-tag">{{ tag }}</span>{% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</main>

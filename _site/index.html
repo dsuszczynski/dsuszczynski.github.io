@@ -1,9 +1,132 @@
----
-layout: default
-title: Senior Technology Leader | VP of Engineering | Engineering Director
-description: Daniel Suszczynski - Senior Engineering Leader. 20 years building high-performance engineering organizations. Available for leadership roles and consulting.
----
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senior Technology Leader | VP of Engineering | Engineering Director | Daniel Suszczynski</title>
+<meta name="description" content="Daniel Suszczynski - Senior Engineering Leader. 20 years building high-performance engineering organizations. Available for leadership roles and consulting.">
+<link rel="canonical" href="http://0.0.0.0:4000/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Senior Technology Leader | VP of Engineering | Engineering Director">
+<meta property="og:description" content="Daniel Suszczynski - Senior Engineering Leader. 20 years building high-performance engineering organizations. Available for leadership roles and consulting.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://0.0.0.0:4000/">
+
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+    
+</head>
+<body>
+    
+    <canvas id="network-canvas"></canvas>
+<script>
+    const canvas = document.getElementById('network-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [], mouse = { x: null, y: null };
+    const config = { nodeCount: 80, connectionDistance: 150, nodeSpeed: 0.3, colors: { cyan: '#00d4ff', teal: '#0891b2', orange: '#f97316' } };
+    
+    function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+    
+    function createNodes() {
+        nodes = [];
+        for (let i = 0; i < config.nodeCount; i++) {
+            const colorKeys = Object.keys(config.colors);
+            nodes.push({ 
+                x: Math.random() * width, 
+                y: Math.random() * height, 
+                vx: (Math.random() - 0.5) * config.nodeSpeed, 
+                vy: (Math.random() - 0.5) * config.nodeSpeed, 
+                radius: Math.random() * 2 + 1, 
+                color: config.colors[colorKeys[Math.floor(Math.random() * colorKeys.length)]] 
+            });
+        }
+    }
+    
+    function drawNode(node) {
+        ctx.beginPath(); 
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2); 
+        ctx.fillStyle = node.color; 
+        ctx.fill();
+        ctx.shadowBlur = 15; 
+        ctx.shadowColor = node.color; 
+        ctx.fill(); 
+        ctx.shadowBlur = 0;
+    }
+    
+    function drawConnections() {
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < config.connectionDistance) {
+                    ctx.beginPath(); 
+                    ctx.moveTo(nodes[i].x, nodes[i].y); 
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.strokeStyle = `rgba(0, 212, 255, ${(1 - distance / config.connectionDistance) * 0.5})`; 
+                    ctx.lineWidth = 0.5; 
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+    
+    function updateNodes() {
+        nodes.forEach(node => {
+            node.x += node.vx; 
+            node.y += node.vy;
+            if (node.x < 0 || node.x > width) node.vx *= -1;
+            if (node.y < 0 || node.y > height) node.vy *= -1;
+            if (mouse.x && mouse.y) {
+                const dx = node.x - mouse.x, dy = node.y - mouse.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) { node.x += dx * 0.02; node.y += dy * 0.02; }
+            }
+        });
+    }
+    
+    function animate() { 
+        ctx.clearRect(0, 0, width, height); 
+        drawConnections(); 
+        nodes.forEach(drawNode); 
+        updateNodes(); 
+        requestAnimationFrame(animate); 
+    }
+    
+    resize(); 
+    createNodes(); 
+    animate();
+    window.addEventListener('resize', () => { resize(); createNodes(); });
+    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+</script>
+
+    
+    
+    <div class="content-wrapper">
+        <nav id="nav">
+    <div class="container nav-content">
+        <a href="/" class="nav-logo">&lt;DS/&gt;</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/#about" class="active">About</a></li>
+            <li><a href="/#experience">Experience</a></li>
+            <li><a href="/#skills">Skills</a></li>
+<!--            <li><a href="/articles/" >Articles</a></li>-->
+<!--            <li><a href="/case-studies/" >Case Studies</a></li>-->
+            <li><a href="/#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+        
+        <style>
     /* Hero */
     .hero { min-height: 100vh; display: flex; align-items: center; padding: var(--space-2xl) 0; position: relative; }
     .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
@@ -146,7 +269,7 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
                 <div class="hero-image-container">
                     <div class="hero-image-glow"></div>
                     <div class="hero-image-frame"></div>
-                    <img src="{{ '/photo.jpg' | relative_url }}" alt="Daniel Suszczynski" class="hero-image">
+                    <img src="/photo.jpg" alt="Daniel Suszczynski" class="hero-image">
                     <div class="hero-stats">
                         <div class="stat-card"><div class="stat-value">20+</div><div class="stat-label">Years Experience</div></div>
                         <div class="stat-card"><div class="stat-value">60+</div><div class="stat-label">Team Size Led</div></div>
@@ -275,20 +398,31 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
             <h2 class="section-title">Latest Articles</h2>
         </div>
         <div class="preview-grid">
-            {% for article in site.articles limit:2 %}
-            <a href="{{ article.url | relative_url }}" class="article-card animate-on-scroll">
-                <div class="article-card-date">{{ article.date | date: "%B %Y" }}</div>
-                <h3 class="article-card-title">{{ article.title }}</h3>
-                <p class="article-card-excerpt">{{ article.excerpt | strip_html | truncate: 150 }}</p>
-                {% if article.tags %}
+            
+            <a href="/articles/ddd-event-storming-practical-guide/" class="article-card animate-on-scroll">
+                <div class="article-card-date">December 2025</div>
+                <h3 class="article-card-title">DDD & Event Storming: A Practical Guide for CTOs</h3>
+                <p class="article-card-excerpt">Domain-Driven Design (DDD) has become a cornerstone of modern software architecture, yet many organizations struggle with its adoption. After intro...</p>
+                
                 <div class="article-card-tags">
-                    {% for tag in article.tags limit:2 %}<span class="article-tag">{{ tag }}</span>{% endfor %}
+                    <span class="article-tag">DDD</span><span class="article-tag">Event Storming</span>
                 </div>
-                {% endif %}
+                
             </a>
-            {% endfor %}
+            
+            <a href="/articles/implementing-team-topologies-fintech/" class="article-card animate-on-scroll">
+                <div class="article-card-date">January 2026</div>
+                <h3 class="article-card-title">Implementing Team Topologies in a Fintech Environment</h3>
+                <p class="article-card-excerpt">When I joined FinCompare as Head of Technology in May 2023, the engineering organization was struggling with classic symptoms of a fast-growing sta...</p>
+                
+                <div class="article-card-tags">
+                    <span class="article-tag">Team Topologies</span><span class="article-tag">Organization Design</span>
+                </div>
+                
+            </a>
+            
         </div>
-        <a href="{{ '/articles/' | relative_url }}" class="view-all-link">View all articles <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/articles/" class="view-all-link">View all articles <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
 </section>
 
@@ -301,20 +435,20 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
             <h2 class="section-title">Case Studies</h2>
         </div>
         <div class="preview-grid">
-            {% for case_study in site.case_studies limit:2 %}
-            <a href="{{ case_study.url | relative_url }}" class="case-study-card animate-on-scroll">
+            
+            <a href="/case-studies/fincompare-transformation/" class="case-study-card animate-on-scroll">
                 <div class="case-study-image">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                 </div>
                 <div class="case-study-content">
-                    <div class="case-study-category">{{ case_study.category }}</div>
-                    <h3 class="case-study-title">{{ case_study.title }}</h3>
-                    <p class="case-study-excerpt">{{ case_study.excerpt | strip_html | truncate: 120 }}</p>
+                    <div class="case-study-category">Technology Transformation</div>
+                    <h3 class="case-study-title">FinCompare: From Technical Debt to DORA Excellence</h3>
+                    <p class="case-study-excerpt">How we transformed a struggling engineering organization, achieved elite-level DORA metrics in 7 months, and built a ...</p>
                 </div>
             </a>
-            {% endfor %}
+            
         </div>
-        <a href="{{ '/case-studies/' | relative_url }}" class="view-all-link">View all case studies <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="/case-studies/" class="view-all-link">View all case studies <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
 </section>
 
@@ -331,14 +465,14 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
                 </div>
                 <p class="contact-text">I'm interested in engineering leadership roles where I can drive impact, as well as consulting engagements on engineering strategy, organizational design, and technology transformation.</p>
                 <div class="contact-links">
-                    <a href="mailto:{{ site.author.email }}" class="contact-link">
+                    <a href="mailto:daniel@suszczynski.dev" class="contact-link">
                         <div class="contact-link-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                        <div class="contact-link-text"><div class="contact-link-label">Email</div><div class="contact-link-value">{{ site.author.email }}</div></div>
+                        <div class="contact-link-text"><div class="contact-link-label">Email</div><div class="contact-link-value">daniel@suszczynski.dev</div></div>
                         <span class="contact-link-arrow">→</span>
                     </a>
-                    <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener" class="contact-link">
+                    <a href="https://linkedin.com/in/suszczynski" target="_blank" rel="noopener" class="contact-link">
                         <div class="contact-link-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-                        <div class="contact-link-text"><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/{{ site.author.linkedin }}</div></div>
+                        <div class="contact-link-text"><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/suszczynski</div></div>
                         <span class="contact-link-arrow">→</span>
                     </a>
                 </div>
@@ -347,7 +481,7 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
                 <h3 class="contact-card-title">Looking for a Technology Leader or Advisor?</h3>
                 <p class="contact-card-subtitle">I'm open to engineering leadership roles as well as consulting and advisory engagements.</p>
                 <p>With experience in fintech, startups, and scaleups, I bring a proven track record of transforming organizations and building high-performing teams.</p>
-                <p><strong>Location:</strong> {{ site.author.location }}<br><strong>Languages:</strong> English (fluent), German (working), Polish (native)</p>
+                <p><strong>Location:</strong> Berlin, Germany<br><strong>Languages:</strong> English (fluent), German (working), Polish (native)</p>
             </div>
         </div>
     </div>
@@ -370,3 +504,85 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
     }, observerOptions);
     sections.forEach(section => sectionObserver.observe(section));
 </script>
+
+        
+        <footer>
+    <div class="container footer-content">
+        <p class="footer-text">© 2026 Daniel Suszczynski. All rights reserved.</p>
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/suszczynski" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="mailto:daniel@suszczynski.dev" class="social-link" aria-label="Email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+            <a href="https://github.com/suszczynski" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    <script>
+    // Navigation scroll effect
+    const nav = document.getElementById('nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (nav) {
+        window.addEventListener('scroll', () => { 
+            nav.classList.toggle('scrolled', window.scrollY > 50); 
+        });
+    }
+    
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => { 
+            navLinks.classList.toggle('active'); 
+        });
+    }
+    
+    // Safe history update (works in iframes too)
+    function safeUpdateHistory(url, replace = false) {
+        try {
+            if (replace) history.replaceState(null, null, url);
+            else history.pushState(null, null, url);
+        } catch (e) { /* Ignore in sandboxed iframes */ }
+    }
+    
+    // Smooth scroll with URL update
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                safeUpdateHistory(targetId);
+            }
+            if (navLinks) navLinks.classList.remove('active');
+        });
+    });
+    
+    // Fade in animations
+    const fadeObserver = new IntersectionObserver((entries) => { 
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) { 
+                entry.target.style.opacity = '1'; 
+                entry.target.style.transform = 'translateY(0)'; 
+            } 
+        }); 
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => { 
+        el.style.opacity = '0'; 
+        el.style.transform = 'translateY(20px)'; 
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; 
+        fadeObserver.observe(el); 
+    });
+</script>
+
+    
+</body>
+</html>

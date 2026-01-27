@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies | Daniel Suszczynski</title>
+<meta name="description" content="Real-world case studies of technology transformation, team restructuring, and engineering excellence.">
+<link rel="canonical" href="http://0.0.0.0:4000/case-studies/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Case Studies">
+<meta property="og:description" content="Real-world case studies of technology transformation, team restructuring, and engineering excellence.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://0.0.0.0:4000/case-studies/">
+
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+    
+</head>
+<body>
+    
+    <canvas id="network-canvas"></canvas>
+<script>
+    const canvas = document.getElementById('network-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [], mouse = { x: null, y: null };
+    const config = { nodeCount: 80, connectionDistance: 150, nodeSpeed: 0.3, colors: { cyan: '#00d4ff', teal: '#0891b2', orange: '#f97316' } };
+    
+    function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+    
+    function createNodes() {
+        nodes = [];
+        for (let i = 0; i < config.nodeCount; i++) {
+            const colorKeys = Object.keys(config.colors);
+            nodes.push({ 
+                x: Math.random() * width, 
+                y: Math.random() * height, 
+                vx: (Math.random() - 0.5) * config.nodeSpeed, 
+                vy: (Math.random() - 0.5) * config.nodeSpeed, 
+                radius: Math.random() * 2 + 1, 
+                color: config.colors[colorKeys[Math.floor(Math.random() * colorKeys.length)]] 
+            });
+        }
+    }
+    
+    function drawNode(node) {
+        ctx.beginPath(); 
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2); 
+        ctx.fillStyle = node.color; 
+        ctx.fill();
+        ctx.shadowBlur = 15; 
+        ctx.shadowColor = node.color; 
+        ctx.fill(); 
+        ctx.shadowBlur = 0;
+    }
+    
+    function drawConnections() {
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < config.connectionDistance) {
+                    ctx.beginPath(); 
+                    ctx.moveTo(nodes[i].x, nodes[i].y); 
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.strokeStyle = `rgba(0, 212, 255, ${(1 - distance / config.connectionDistance) * 0.5})`; 
+                    ctx.lineWidth = 0.5; 
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+    
+    function updateNodes() {
+        nodes.forEach(node => {
+            node.x += node.vx; 
+            node.y += node.vy;
+            if (node.x < 0 || node.x > width) node.vx *= -1;
+            if (node.y < 0 || node.y > height) node.vy *= -1;
+            if (mouse.x && mouse.y) {
+                const dx = node.x - mouse.x, dy = node.y - mouse.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) { node.x += dx * 0.02; node.y += dy * 0.02; }
+            }
+        });
+    }
+    
+    function animate() { 
+        ctx.clearRect(0, 0, width, height); 
+        drawConnections(); 
+        nodes.forEach(drawNode); 
+        updateNodes(); 
+        requestAnimationFrame(animate); 
+    }
+    
+    resize(); 
+    createNodes(); 
+    animate();
+    window.addEventListener('resize', () => { resize(); createNodes(); });
+    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+</script>
+
+    
+    
+    <div class="content-wrapper">
+        <nav id="nav">
+    <div class="container nav-content">
+        <a href="/" class="nav-logo">&lt;DS/&gt;</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/#about" >About</a></li>
+            <li><a href="/#experience">Experience</a></li>
+            <li><a href="/#skills">Skills</a></li>
+<!--            <li><a href="/articles/" >Articles</a></li>-->
+<!--            <li><a href="/case-studies/" class="active">Case Studies</a></li>-->
+            <li><a href="/#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+        
+        <style>
+    .case-studies-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); padding-bottom: var(--space-2xl); }
+    .case-study-card { background: var(--color-bg-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; text-decoration: none; color: inherit; transition: all 0.3s ease; display: flex; flex-direction: column; }
+    .case-study-card:hover { border-color: var(--color-cyan); transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0, 212, 255, 0.15); }
+    .case-study-visual { height: 200px; background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-surface)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .case-study-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, var(--color-cyan-soft) 0%, transparent 50%); }
+    .case-study-visual svg { width: 64px; height: 64px; color: var(--color-cyan); opacity: 0.6; position: relative; z-index: 1; }
+    .case-study-content { padding: var(--space-lg); flex: 1; display: flex; flex-direction: column; }
+    .case-study-category { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-orange); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-xs); }
+    .case-study-title { font-size: 1.3rem; font-weight: 600; margin-bottom: var(--space-sm); line-height: 1.3; }
+    .case-study-excerpt { color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; flex: 1; }
+    .case-study-meta { display: flex; gap: var(--space-md); margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-border); }
+    .case-study-stat-value { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--color-cyan); }
+    .case-study-stat-label { font-size: 0.7rem; color: var(--color-text-muted); text-transform: uppercase; }
+    .case-study-cta { display: inline-flex; align-items: center; gap: var(--space-xs); color: var(--color-cyan); font-weight: 500; margin-top: var(--space-md); }
+    .case-study-card:hover .case-study-cta { gap: var(--space-sm); }
+    @media (max-width: 768px) { .case-studies-grid { grid-template-columns: 1fr; } }
+</style>
+
+<header class="page-header">
+    <div class="container">
+        <p class="section-eyebrow">// Real-world Solutions</p>
+        <h1 class="page-title">Case Studies</h1>
+        <p class="page-description">Deep dives into technology transformations, organizational changes, and engineering challenges I've tackled throughout my career.</p>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="case-studies-grid">
+            
+            <a href="/case-studies/fincompare-transformation/" class="case-study-card animate-on-scroll">
+                <div class="case-study-visual">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <div class="case-study-content">
+                    <div class="case-study-category">Technology Transformation</div>
+                    <h2 class="case-study-title">FinCompare: From Technical Debt to DORA Excellence</h2>
+                    <p class="case-study-excerpt">How we transformed a struggling engineering organization, achieved elite-level DORA metrics in 7 months, and built a culture of continuous improvem...</p>
+                    
+                    <div class="case-study-meta">
+                        
+                        <div class="case-study-stat">
+                            <div class="case-study-stat-value">7 months</div>
+                            <div class="case-study-stat-label">Transformation Time</div>
+                        </div>
+                        
+                        <div class="case-study-stat">
+                            <div class="case-study-stat-value">40%</div>
+                            <div class="case-study-stat-label">Faster Delivery</div>
+                        </div>
+                        
+                        <div class="case-study-stat">
+                            <div class="case-study-stat-value">30+</div>
+                            <div class="case-study-stat-label">Team Members</div>
+                        </div>
+                        
+                    </div>
+                    
+                    <span class="case-study-cta">View case study →</span>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+</main>
+
+        
+        <footer>
+    <div class="container footer-content">
+        <p class="footer-text">© 2026 Daniel Suszczynski. All rights reserved.</p>
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/suszczynski" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="mailto:daniel@suszczynski.dev" class="social-link" aria-label="Email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+            <a href="https://github.com/suszczynski" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    <script>
+    // Navigation scroll effect
+    const nav = document.getElementById('nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (nav) {
+        window.addEventListener('scroll', () => { 
+            nav.classList.toggle('scrolled', window.scrollY > 50); 
+        });
+    }
+    
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => { 
+            navLinks.classList.toggle('active'); 
+        });
+    }
+    
+    // Safe history update (works in iframes too)
+    function safeUpdateHistory(url, replace = false) {
+        try {
+            if (replace) history.replaceState(null, null, url);
+            else history.pushState(null, null, url);
+        } catch (e) { /* Ignore in sandboxed iframes */ }
+    }
+    
+    // Smooth scroll with URL update
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                safeUpdateHistory(targetId);
+            }
+            if (navLinks) navLinks.classList.remove('active');
+        });
+    });
+    
+    // Fade in animations
+    const fadeObserver = new IntersectionObserver((entries) => { 
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) { 
+                entry.target.style.opacity = '1'; 
+                entry.target.style.transform = 'translateY(0)'; 
+            } 
+        }); 
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => { 
+        el.style.opacity = '0'; 
+        el.style.transform = 'translateY(20px)'; 
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; 
+        fadeObserver.observe(el); 
+    });
+</script>
+
+    
+</body>
+</html>

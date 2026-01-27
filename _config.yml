@@ -1,0 +1,52 @@
+# Site settings
+title: Daniel Suszczynski
+description: Senior Technology Leader, CTO, Head of Engineering with 19+ years of experience
+url: "https://suszczynski.dev"
+baseurl: ""
+
+# Author
+author:
+  name: Daniel Suszczynski
+  email: daniel@suszczynski.dev
+  linkedin: suszczynski
+  github: suszczynski
+  location: Berlin, Germany
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Collections
+collections:
+  articles:
+    output: true
+    permalink: /articles/:slug/
+  case_studies:
+    output: true
+    permalink: /case-studies/:slug/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "articles"
+    values:
+      layout: "article"
+  - scope:
+      path: ""
+      type: "case_studies"
+    values:
+      layout: "case-study"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude from build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
