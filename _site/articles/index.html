@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles | Daniel Suszczynski</title>
+<meta name="description" content="Thoughts on technology leadership, Domain-Driven Design, Team Topologies, and building high-performing teams.">
+<link rel="canonical" href="http://0.0.0.0:4000/articles/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Articles">
+<meta property="og:description" content="Thoughts on technology leadership, Domain-Driven Design, Team Topologies, and building high-performing teams.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://0.0.0.0:4000/articles/">
+
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+    
+</head>
+<body>
+    
+    <canvas id="network-canvas"></canvas>
+<script>
+    const canvas = document.getElementById('network-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [], mouse = { x: null, y: null };
+    const config = { nodeCount: 80, connectionDistance: 150, nodeSpeed: 0.3, colors: { cyan: '#00d4ff', teal: '#0891b2', orange: '#f97316' } };
+    
+    function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+    
+    function createNodes() {
+        nodes = [];
+        for (let i = 0; i < config.nodeCount; i++) {
+            const colorKeys = Object.keys(config.colors);
+            nodes.push({ 
+                x: Math.random() * width, 
+                y: Math.random() * height, 
+                vx: (Math.random() - 0.5) * config.nodeSpeed, 
+                vy: (Math.random() - 0.5) * config.nodeSpeed, 
+                radius: Math.random() * 2 + 1, 
+                color: config.colors[colorKeys[Math.floor(Math.random() * colorKeys.length)]] 
+            });
+        }
+    }
+    
+    function drawNode(node) {
+        ctx.beginPath(); 
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2); 
+        ctx.fillStyle = node.color; 
+        ctx.fill();
+        ctx.shadowBlur = 15; 
+        ctx.shadowColor = node.color; 
+        ctx.fill(); 
+        ctx.shadowBlur = 0;
+    }
+    
+    function drawConnections() {
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < config.connectionDistance) {
+                    ctx.beginPath(); 
+                    ctx.moveTo(nodes[i].x, nodes[i].y); 
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.strokeStyle = `rgba(0, 212, 255, ${(1 - distance / config.connectionDistance) * 0.5})`; 
+                    ctx.lineWidth = 0.5; 
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+    
+    function updateNodes() {
+        nodes.forEach(node => {
+            node.x += node.vx; 
+            node.y += node.vy;
+            if (node.x < 0 || node.x > width) node.vx *= -1;
+            if (node.y < 0 || node.y > height) node.vy *= -1;
+            if (mouse.x && mouse.y) {
+                const dx = node.x - mouse.x, dy = node.y - mouse.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 100) { node.x += dx * 0.02; node.y += dy * 0.02; }
+            }
+        });
+    }
+    
+    function animate() { 
+        ctx.clearRect(0, 0, width, height); 
+        drawConnections(); 
+        nodes.forEach(drawNode); 
+        updateNodes(); 
+        requestAnimationFrame(animate); 
+    }
+    
+    resize(); 
+    createNodes(); 
+    animate();
+    window.addEventListener('resize', () => { resize(); createNodes(); });
+    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+</script>
+
+    
+    
+    <div class="content-wrapper">
+        <nav id="nav">
+    <div class="container nav-content">
+        <a href="/" class="nav-logo">&lt;DS/&gt;</a>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/#about" >About</a></li>
+            <li><a href="/#experience">Experience</a></li>
+            <li><a href="/#skills">Skills</a></li>
+            <li><a href="/articles/" class="active">Articles</a></li>
+            <li><a href="/case-studies/" >Case Studies</a></li>
+            <li><a href="/#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+        
+        <style>
+    .articles-list { padding-bottom: var(--space-2xl); }
+    .article-item { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-lg); padding: var(--space-lg) 0; border-bottom: 1px solid var(--color-border); text-decoration: none; color: inherit; transition: all 0.3s ease; }
+    .article-item:hover { background: rgba(0, 212, 255, 0.02); }
+    .article-item:hover .article-title { color: var(--color-cyan); }
+    .article-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: var(--space-xs); }
+    .article-read-time { font-size: 0.8rem; color: var(--color-text-muted); }
+    .article-title { font-size: 1.4rem; font-weight: 600; margin-bottom: var(--space-xs); transition: color 0.3s ease; }
+    .article-excerpt { color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--space-sm); }
+    .article-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .article-tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 4px 10px; background: var(--color-cyan-soft); border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-cyan); }
+    @media (max-width: 768px) { .article-item { grid-template-columns: 1fr; gap: var(--space-sm); } }
+</style>
+
+<header class="page-header">
+    <div class="container">
+        <p class="section-eyebrow">// Insights & Knowledge</p>
+        <h1 class="page-title">Articles</h1>
+        <p class="page-description">Thoughts on technology leadership, engineering culture, Domain-Driven Design, and building high-performing teams.</p>
+    </div>
+</header>
+
+<main class="articles-list">
+    <div class="container">
+        
+        <a href="/articles/ddd-event-storming-practical-guide/" class="article-item animate-on-scroll">
+            <div class="article-meta">
+                <div class="article-date">December 08, 2025</div>
+                <div class="article-read-time">12 min read</div>
+            </div>
+            <div class="article-content">
+                <h2 class="article-title">DDD & Event Storming: A Practical Guide for CTOs</h2>
+                <p class="article-excerpt">Domain-Driven Design (DDD) has become a cornerstone of modern software architecture, yet many organizations struggle with its adoption. After introducing DDD at multiple companies, I’ve gathered pr...</p>
+                
+                <div class="article-tags">
+                    <span class="article-tag">DDD</span><span class="article-tag">Event Storming</span><span class="article-tag">Architecture</span>
+                </div>
+                
+            </div>
+        </a>
+        
+        <a href="/articles/implementing-team-topologies-fintech/" class="article-item animate-on-scroll">
+            <div class="article-meta">
+                <div class="article-date">January 15, 2026</div>
+                <div class="article-read-time">8 min read</div>
+            </div>
+            <div class="article-content">
+                <h2 class="article-title">Implementing Team Topologies in a Fintech Environment</h2>
+                <p class="article-excerpt">When I joined FinCompare as Head of Technology in May 2023, the engineering organization was struggling with classic symptoms of a fast-growing startup: unclear ownership, constant context-switchin...</p>
+                
+                <div class="article-tags">
+                    <span class="article-tag">Team Topologies</span><span class="article-tag">Organization Design</span><span class="article-tag">Fintech</span>
+                </div>
+                
+            </div>
+        </a>
+        
+    </div>
+</main>
+
+        
+        <footer>
+    <div class="container footer-content">
+        <p class="footer-text">© 2026 Daniel Suszczynski. All rights reserved.</p>
+        <div class="footer-social">
+            <a href="https://linkedin.com/in/suszczynski" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="mailto:daniel@suszczynski.dev" class="social-link" aria-label="Email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+            <a href="https://github.com/suszczynski" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+    <script>
+    // Navigation scroll effect
+    const nav = document.getElementById('nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (nav) {
+        window.addEventListener('scroll', () => { 
+            nav.classList.toggle('scrolled', window.scrollY > 50); 
+        });
+    }
+    
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => { 
+            navLinks.classList.toggle('active'); 
+        });
+    }
+    
+    // Safe history update (works in iframes too)
+    function safeUpdateHistory(url, replace = false) {
+        try {
+            if (replace) history.replaceState(null, null, url);
+            else history.pushState(null, null, url);
+        } catch (e) { /* Ignore in sandboxed iframes */ }
+    }
+    
+    // Smooth scroll with URL update
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                safeUpdateHistory(targetId);
+            }
+            if (navLinks) navLinks.classList.remove('active');
+        });
+    });
+    
+    // Fade in animations
+    const fadeObserver = new IntersectionObserver((entries) => { 
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) { 
+                entry.target.style.opacity = '1'; 
+                entry.target.style.transform = 'translateY(0)'; 
+            } 
+        }); 
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => { 
+        el.style.opacity = '0'; 
+        el.style.transform = 'translateY(20px)'; 
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; 
+        fadeObserver.observe(el); 
+    });
+</script>
+
+    
+</body>
+</html>
