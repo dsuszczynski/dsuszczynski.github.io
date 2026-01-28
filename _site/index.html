@@ -129,7 +129,7 @@
         <style>
     /* Hero */
     .hero { min-height: 100vh; display: flex; align-items: center; padding: var(--space-2xl) 0; position: relative; }
-    .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
+    .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; overflow: visible; }
     .hero-text { animation: fadeInUp 0.8s ease-out; }
     .hero-eyebrow { display: inline-flex; align-items: center; gap: var(--space-xs); padding: 6px 14px; background: var(--color-cyan-soft); border: 1px solid var(--color-border-bright); border-radius: 100px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-cyan); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: 0.1em; }
     .hero-eyebrow::before { content: ''; width: 8px; height: 8px; background: var(--color-cyan); border-radius: 50%; box-shadow: 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan-glow); animation: pulse 2s ease-in-out infinite; }
@@ -142,10 +142,10 @@
     .hero-cta { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
     
     /* Hero Image */
-    .hero-image-wrapper { position: relative; animation: fadeInUp 0.8s ease-out 0.2s both; }
-    .hero-image-container { position: relative; width: 100%; max-width: 380px; margin-left: auto; }
+    .hero-image-wrapper { position: relative; animation: fadeInUp 0.8s ease-out 0.2s both; overflow: visible; }
+    .hero-image-container { position: relative; width: 100%; max-width: 380px; margin-left: auto; overflow: visible; }
     .hero-image-frame { position: absolute; inset: -3px; border-radius: var(--radius-lg); background: linear-gradient(135deg, var(--color-cyan), var(--color-teal), var(--color-orange)); opacity: 0.8; z-index: 0; }
-    .hero-image-glow { position: absolute; inset: -40px; background: radial-gradient(circle, var(--color-cyan-glow) 0%, transparent 70%); z-index: -1; animation: glowPulse 4s ease-in-out infinite; }
+    .hero-image-glow { position: absolute; inset: -90px -80px; background: radial-gradient(ellipse 70% 70% at center, var(--color-cyan-glow) 0%, transparent 70%); z-index: -1; animation: glowPulse 4s ease-in-out infinite; }
     .hero-image { position: relative; width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: var(--radius-lg); z-index: 1; }
     .hero-stats { position: absolute; bottom: -25px; left: -25px; display: flex; gap: var(--space-sm); z-index: 2; }
     .stat-card { background: rgba(4, 21, 37, 0.9); border: 1px solid var(--color-border-bright); border-radius: var(--radius-md); padding: var(--space-sm) var(--space-md); backdrop-filter: blur(20px); }
@@ -308,13 +308,23 @@
                 </div>
                 <div class="expertise-item animate-on-scroll">
                     <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
-                    <div class="expertise-title">Platform & Architecture Evolution</div>
-                    <div class="expertise-desc">Designing domain-oriented, event-driven platforms that scale with product and organization.</div>
+                    <div class="expertise-title">Architecture & System Design</div>
+                    <div class="expertise-desc">Designing domain-oriented, event-driven architectures using DDD, C4 models, and fitness functions.</div>
                 </div>
                 <div class="expertise-item animate-on-scroll">
-                    <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
-                    <div class="expertise-title">Transformation & Modernization</div>
-                    <div class="expertise-desc">Leading complex transformations from legacy monoliths to modern, cloud-native systems.</div>
+                    <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                    <div class="expertise-title">Business Alignment & Domain Ownership</div>
+                    <div class="expertise-desc">Aligning teams to business domains with clear ownership, OKRs, and accountability for outcomes.</div>
+                </div>
+                <div class="expertise-item animate-on-scroll">
+                    <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+                    <div class="expertise-title">Developer Experience & Platform Enablement</div>
+                    <div class="expertise-desc">Reducing friction through paved paths, self-service infrastructure, and DORA & SPACE-driven improvements.</div>
+                </div>
+                <div class="expertise-item animate-on-scroll">
+                    <div class="expertise-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                    <div class="expertise-title">Delivery Quality & Reliability</div>
+                    <div class="expertise-desc">Enabling autonomous teams to deliver and operate reliably through CI/CD, testing, and clear operational ownership.</div>
                 </div>
             </div>
         </div>
@@ -332,7 +342,7 @@
         <div class="timeline">
             <article class="timeline-item animate-on-scroll" itemscope itemtype="https://schema.org/OrganizationRole">
                 <div class="timeline-dot"></div>
-                <div class="timeline-company"><h3 class="timeline-company-name">Advisory & Consulting</h3><span class="timeline-company-location">Current</span></div>
+                <div class="timeline-company"><h3 class="timeline-company-name">Advisory & Consulting</h3><span class="timeline-company-location">Berlin, Germany (EU-wide available)</span></div>
                 <h4 class="timeline-role" itemprop="roleName">Independent Advisor & Consultant</h4>
                 <div class="timeline-period"><time datetime="2025-06">June 2025 – Present</time></div>
                 <p class="timeline-description" itemprop="description">Providing advisory and consulting support to product companies on engineering strategy, organizational design, platform evolution, and technical transformation. Supporting leadership teams during growth and scaling phases.</p>
@@ -381,7 +391,7 @@
             <div class="skill-card animate-on-scroll" itemscope itemtype="https://schema.org/ItemList"><h3 class="skill-card-title" itemprop="name">Engineering Leadership & Organizational Design</h3><ul class="skill-tags" role="list"><li class="skill-tag" itemprop="itemListElement">Engineering Leadership</li><li class="skill-tag" itemprop="itemListElement">Transformational Leadership</li><li class="skill-tag" itemprop="itemListElement">Servant Leadership</li><li class="skill-tag" itemprop="itemListElement">Organizational Design</li><li class="skill-tag" itemprop="itemListElement">Scaling Engineering Teams</li><li class="skill-tag" itemprop="itemListElement">High-Performance Teams</li><li class="skill-tag" itemprop="itemListElement">Talent Development</li></ul></div>
             <div class="skill-card animate-on-scroll" itemscope itemtype="https://schema.org/ItemList"><h3 class="skill-card-title" itemprop="name">Technology & Platform Strategy</h3><ul class="skill-tags" role="list"><li class="skill-tag" itemprop="itemListElement">Technology Strategy</li><li class="skill-tag" itemprop="itemListElement">Platform Strategy</li><li class="skill-tag" itemprop="itemListElement">Platform Engineering</li><li class="skill-tag" itemprop="itemListElement">Architecture Vision</li><li class="skill-tag" itemprop="itemListElement">Technical Roadmapping</li><li class="skill-tag" itemprop="itemListElement">Build vs Buy Decisions</li><li class="skill-tag" itemprop="itemListElement">Developer Experience</li></ul></div>
             <div class="skill-card animate-on-scroll" itemscope itemtype="https://schema.org/ItemList"><h3 class="skill-card-title" itemprop="name">Architecture & System Design</h3><ul class="skill-tags" role="list"><li class="skill-tag" itemprop="itemListElement">Domain-Driven Design</li><li class="skill-tag" itemprop="itemListElement">Event Storming</li><li class="skill-tag" itemprop="itemListElement">Microservices Architecture</li><li class="skill-tag" itemprop="itemListElement">Event-Driven Architecture</li><li class="skill-tag" itemprop="itemListElement">Distributed Systems</li><li class="skill-tag" itemprop="itemListElement">API Design</li><li class="skill-tag" itemprop="itemListElement">Legacy Modernization</li><li class="skill-tag" itemprop="itemListElement">Monolith to Microservices</li></ul></div>
-            <div class="skill-card animate-on-scroll" itemscope itemtype="https://schema.org/ItemList"><h3 class="skill-card-title" itemprop="name">Delivery, Execution & Metrics</h3><ul class="skill-tags" role="list"><li class="skill-tag" itemprop="itemListElement">OKRs</li><li class="skill-tag" itemprop="itemListElement">Agile</li><li class="skill-tag" itemprop="itemListElement">Scrum</li><li class="skill-tag" itemprop="itemListElement">Kanban</li><li class="skill-tag" itemprop="itemListElement">Outcome-Oriented Delivery</li><li class="skill-tag" itemprop="itemListElement">Lean Product Development</li><li class="skill-tag" itemprop="itemListElement">A/B Testing</li><li class="skill-tag" itemprop="itemListElement">Prototyping</li><li class="skill-tag" itemprop="itemListElement">MVP</li><li class="skill-tag" itemprop="itemListElement">CI/CD</li><li class="skill-tag" itemprop="itemListElement">DORA Metrics</li></ul></div>
+            <div class="skill-card animate-on-scroll" itemscope itemtype="https://schema.org/ItemList"><h3 class="skill-card-title" itemprop="name">Delivery, Execution & Metrics</h3><ul class="skill-tags" role="list"><li class="skill-tag" itemprop="itemListElement">OKRs</li><li class="skill-tag" itemprop="itemListElement">Agile</li><li class="skill-tag" itemprop="itemListElement">Scrum</li><li class="skill-tag" itemprop="itemListElement">Kanban</li><li class="skill-tag" itemprop="itemListElement">Outcome-Oriented Delivery</li><li class="skill-tag" itemprop="itemListElement">Lean Product Development</li><li class="skill-tag" itemprop="itemListElement">A/B Testing</li><li class="skill-tag" itemprop="itemListElement">Prototyping</li><li class="skill-tag" itemprop="itemListElement">MVP</li><li class="skill-tag" itemprop="itemListElement">CI/CD</li><li class="skill-tag" itemprop="itemListElement">DORA Metrics</li><li class="skill-tag" itemprop="itemListElement">SPACE Framework</li></ul></div>
             <div class="skill-card animate-on-scroll" itemscope itemtype="https://schema.org/ItemList"><h3 class="skill-card-title" itemprop="name">Data, AI & Machine Learning Enablement</h3><ul class="skill-tags" role="list"><li class="skill-tag" itemprop="itemListElement">AI Adoption</li><li class="skill-tag" itemprop="itemListElement">Machine Learning in Products</li><li class="skill-tag" itemprop="itemListElement">Data-Driven Decision Making</li><li class="skill-tag" itemprop="itemListElement">Analytics Platforms</li><li class="skill-tag" itemprop="itemListElement">Experimentation</li><li class="skill-tag" itemprop="itemListElement">Machine Learning Integration</li></ul></div>
             <div class="skill-card animate-on-scroll" itemscope itemtype="https://schema.org/ItemList"><h3 class="skill-card-title" itemprop="name">Cloud, Reliability & Security</h3><ul class="skill-tags" role="list"><li class="skill-tag" itemprop="itemListElement">AWS</li><li class="skill-tag" itemprop="itemListElement">Cloud Migration</li><li class="skill-tag" itemprop="itemListElement">DevOps</li><li class="skill-tag" itemprop="itemListElement">Incident Management</li><li class="skill-tag" itemprop="itemListElement">Cloud Infrastructure</li><li class="skill-tag" itemprop="itemListElement">Observability</li><li class="skill-tag" itemprop="itemListElement">Reliability Engineering</li><li class="skill-tag" itemprop="itemListElement">Infrastructure as Code</li><li class="skill-tag" itemprop="itemListElement">ISO 27001</li><li class="skill-tag" itemprop="itemListElement">ISMS</li></ul></div>
         </div>
