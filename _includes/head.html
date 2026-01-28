@@ -4,12 +4,29 @@
 <meta name="description" content="{{ page.description | default: site.description }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | relative_url }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | relative_url }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+<meta name="theme-color" content="#041525">
+
 <!-- Open Graph -->
 <meta property="og:title" content="{{ page.title | default: site.title }}">
 <meta property="og:description" content="{{ page.description | default: site.description }}">
 <meta property="og:type" content="{% if page.layout == 'article' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ site.url }}/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="{{ site.title }}">
 {% if page.date %}<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">{% endif %}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.title | default: site.title }}">
+<meta name="twitter:description" content="{{ page.description | default: site.description }}">
+<meta name="twitter:image" content="{{ site.url }}/og-image.png">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,3 +35,36 @@
 
 <!-- Styles -->
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+<!-- JSON-LD Person Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Daniel Suszczynski",
+  "url": "{{ site.url }}",
+  "image": "{{ site.url }}/photo.jpg",
+  "jobTitle": "Senior Technology Leader",
+  "description": "{{ site.description }}",
+  "email": "{{ site.author.email }}",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Berlin",
+    "addressCountry": "Germany"
+  },
+  "sameAs": [
+    "https://linkedin.com/in/{{ site.author.linkedin }}",
+    "https://github.com/{{ site.author.github }}"
+  ],
+  "knowsAbout": [
+    "Engineering Leadership",
+    "Technology Strategy",
+    "Organizational Design",
+    "Platform Engineering",
+    "Domain-Driven Design",
+    "Team Topologies",
+    "Cloud Infrastructure",
+    "Fintech"
+  ]
+}
+</script>
