@@ -1,8 +1,20 @@
 ---
 title: "Scaling Engineering Organizations for Sustainable Growth"
+description: "A practical blueprint for scaling engineering teams from 40 to 80+ engineers. Learn about Team Topologies, domain ownership, platform engineering, DORA metrics, and organizational transformation strategies."
 category: Organizational Design
 excerpt: "A practical leadership blueprint for transforming fragmented delivery into autonomous, outcome-driven domains at scale."
 slug: scaling-engineering-organizations
+keywords:
+  - scaling engineering teams
+  - engineering organization design
+  - Team Topologies
+  - platform engineering
+  - DORA metrics
+  - engineering leadership
+  - organizational transformation
+  - developer experience
+  - domain-driven design
+  - OKRs for engineering
 icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="13" width="3" height="3"/><rect x="3" y="17" width="3" height="3"/><rect x="3" y="21" width="3" height="3"/><rect x="10.5" y="9" width="3" height="3"/><rect x="10.5" y="13" width="3" height="3"/><rect x="10.5" y="17" width="3" height="3"/><rect x="10.5" y="21" width="3" height="3"/><rect x="18" y="5" width="3" height="3"/><rect x="18" y="9" width="3" height="3"/><rect x="18" y="13" width="3" height="3"/><rect x="18" y="17" width="3" height="3"/><rect x="18" y="21" width="3" height="3"/><line x1="4.5" y1="11" x2="12" y2="7"/><line x1="12" y1="7" x2="19.5" y2="3"/><polyline points="17.5,4 19.5,2 21.5,4"/></svg>'
 stats:
   - value: "40→80+"
@@ -75,27 +87,16 @@ slides:
     subtitle: "Designing for 40 → 80+ engineers"
     content: |
       <div class="content-section">
-          <div class="section-label">Structure Overview</div>
+          <div class="section-label">Design Philosophy</div>
           <h2 class="section-title">Value Streams Over Functions</h2>
           <div class="section-content">
-              <p>I design organizations around value streams and domain ownership, not functions.</p>
-              <p>Core elements:</p>
+              <p>I design organizations around value streams and domain ownership, not functions. Core elements include:</p>
               <ul>
-                  <li>Stream-aligned product teams</li>
-                  <li>Platform & enablement teams</li>
-                  <li>Complicated subsystem teams</li>
-                  <li>Embedded technical leadership</li>
+                  <li><strong>Stream-aligned product teams</strong> — Own business capabilities end-to-end</li>
+                  <li><strong>Platform & enablement teams</strong> — Provide paved paths for infrastructure, CI/CD, observability, security</li>
+                  <li><strong>Complicated subsystem teams</strong> — Isolate algorithmic, data, or domain complexity behind stable APIs</li>
+                  <li><strong>Embedded technical leadership</strong> — Drive architectural coherence and technology alignment across domains</li>
               </ul>
-          </div>
-      </div>
-
-      <div class="content-section">
-          <div class="section-label">Team Types</div>
-          <h2 class="section-title">Team Topologies in Practice</h2>
-          <div class="section-content">
-              <p><strong>Stream-aligned teams</strong><br/>Own business capabilities end-to-end.</p>
-              <p><strong>Platform / Enablement teams</strong><br/>Provide paved paths for infrastructure, CI/CD, observability, security, and developer tooling.</p>
-              <p><strong>Complicated subsystem teams</strong><br/>Isolate algorithmic, data, or domain complexity behind stable APIs.</p>
           </div>
       </div>
 
@@ -105,7 +106,7 @@ slides:
           <div class="section-content">
               <ul>
                   <li><strong>Engineering Managers</strong> — accountable for delivery health and people growth</li>
-                  <li><strong>Tech Leads</strong> — embedded per team</li>
+                  <li><strong>Tech Leads</strong> — embedded per team for technical direction</li>
                   <li><strong>Staff / Principal Engineers</strong> — providing cross-team architectural coherence</li>
                   <li><strong>Director level</strong> — focusing on system health, strategy, and capability building</li>
               </ul>
@@ -120,8 +121,7 @@ slides:
           <div class="section-label">Domain Orientation</div>
           <h2 class="section-title">Teams Aligned to Domains</h2>
           <div class="section-content">
-              <p>Teams are aligned to business domains, not technical components.</p>
-              <p>Domain ownership is:</p>
+              <p>Teams are aligned to business domains, not technical components. Domain ownership is:</p>
               <ul>
                   <li>Reflected in <strong>context maps</strong></li>
                   <li><strong>Stable over time</strong></li>
@@ -135,12 +135,12 @@ slides:
           <h2 class="section-title">Outcomes Over Output</h2>
           <div class="section-content">
               <p>Company strategy → Domain OKRs → Team OKRs</p>
-              <p>Engineering does not track output. Engineering tracks outcomes:</p>
+              <p>Engineering does not track output. Engineering <strong>tracks outcomes:</strong></p>
               <ul>
-                  <li>Checkout conversion rate</li>
-                  <li>Time to integrate a partner</li>
-                  <li>Cost per transaction</li>
-                  <li>Incident frequency</li>
+                  <li><strong>Checkout conversion rate</strong></li>
+                  <li><strong>Time to integrate a partner</strong></li>
+                  <li><strong>Cost per transaction</strong></li>
+                  <li><strong>Incident frequency</strong></li>
               </ul>
           </div>
       </div>
@@ -163,17 +163,14 @@ slides:
     subtitle: "You build it. You run it."
     content: |
       <div class="content-section">
-          <div class="section-label">End-to-End Ownership</div>
-          <h2 class="section-title">Full Stack Responsibility</h2>
+          <div class="section-label">Ownership Model</div>
+          <h2 class="section-title">End-to-End Team Ownership</h2>
           <div class="section-content">
               <p>Teams own:</p>
               <ul>
-                  <li>Code</li>
-                  <li>Infrastructure definitions</li>
-                  <li>Deployment</li>
-                  <li>Monitoring</li>
-                  <li>On-call</li>
-                  <li>Incident resolution</li>
+                  <li><strong>Code</strong> and <strong>infrastructure definitions</strong></li>
+                  <li><strong>Deployment</strong> and <strong>monitoring</strong></li>
+                  <li><strong>On-call</strong> and <strong>incident resolution</strong></li>
               </ul>
           </div>
       </div>
@@ -183,10 +180,10 @@ slides:
           <h2 class="section-title">Independent Deployability</h2>
           <div class="section-content">
               <ul>
-                  <li>Loosely coupled services</li>
-                  <li>Independent deployability</li>
-                  <li>Trunk-based development</li>
-                  <li>CI-first pipelines</li>
+                  <li><strong>Loosely coupled services</strong></li>
+                  <li><strong>Independent deployability</strong></li>
+                  <li><strong>Trunk-based development</strong></li>
+                  <li><strong>CI-first pipelines</strong></li>
               </ul>
           </div>
       </div>
@@ -196,42 +193,42 @@ slides:
           <h2 class="section-title">Built-in Quality</h2>
           <div class="section-content">
               <ul>
-                  <li>Automated testing pyramid</li>
-                  <li>Contract testing between services</li>
-                  <li>Observability as a first-class concern</li>
-                  <li>Fitness Functions validating architectural characteristics</li>
+                  <li><strong>Automated testing pyramid</strong></li>
+                  <li><strong>Contract testing</strong> between services</li>
+                  <li><strong>Observability</strong> as a first-class concern</li>
+                  <li><strong>Fitness Functions</strong> validating architectural characteristics</li>
               </ul>
           </div>
       </div>
 
   - label: "Developer Experience"
     title: "Developer Experience & Platform Enablement"
-    subtitle: "Default path is the best path"
+    subtitle: "The default path is the best path"
     content: |
       <div class="content-section">
           <div class="section-label">Paved Paths</div>
-          <h2 class="section-title">Platform Capabilities</h2>
+          <h2 class="section-title">Platform Team Capabilities</h2>
           <div class="section-content">
               <p>Platform teams provide:</p>
               <ul>
-                  <li>CI/CD templates</li>
-                  <li>Infrastructure modules</li>
-                  <li>Service templates</li>
-                  <li>Security scanning</li>
-                  <li>Observability stacks</li>
+                  <li><strong>CI/CD templates</strong></li>
+                  <li><strong>Infrastructure modules</strong></li>
+                  <li><strong>Service templates</strong></li>
+                  <li><strong>Security scanning</strong></li>
+                  <li><strong>Observability stacks</strong></li>
               </ul>
           </div>
       </div>
 
       <div class="content-section">
           <div class="section-label">Fast Onboarding</div>
-          <h2 class="section-title">Time to Productivity</h2>
+          <h2 class="section-title">Reducing Time to Productivity</h2>
           <div class="section-content">
               <ul>
-                  <li>One-command local setup</li>
-                  <li>Golden path documentation</li>
-                  <li>Service catalog</li>
-                  <li>Clear ownership metadata</li>
+                  <li><strong>One-command local setup</strong></li>
+                  <li><strong>Golden path documentation</strong></li>
+                  <li><strong>Service catalog</strong></li>
+                  <li><strong>Clear ownership metadata</strong></li>
               </ul>
           </div>
       </div>
@@ -241,11 +238,11 @@ slides:
           <h2 class="section-title">Data-Driven Improvement</h2>
           <div class="section-content">
               <ul>
-                  <li>DORA metrics</li>
-                  <li>Selected SPACE signals</li>
-                  <li>Developer surveys</li>
-                  <li>Time-to-first-PR</li>
-                  <li>Change failure rate</li>
+                  <li><strong>DORA metrics</strong></li>
+                  <li><strong>Selected SPACE signals</strong></li>
+                  <li><strong>Developer surveys</strong></li>
+                  <li><strong>Time-to-first-PR</strong></li>
+                  <li><strong>Change failure rate</strong></li>
               </ul>
           </div>
       </div>
@@ -256,66 +253,66 @@ slides:
     content: |
       <div class="content-section">
           <div class="section-label">Managing Managers</div>
-          <h2 class="section-title">EM Development</h2>
+          <h2 class="section-title">Engineering Manager Development</h2>
           <div class="section-content">
               <ul>
-                  <li>Regular EM forums</li>
-                  <li>Peer coaching</li>
-                  <li>Leadership expectations framework</li>
-                  <li>Calibration on delivery health</li>
+                  <li><strong>Regular EM forums</strong></li>
+                  <li><strong>Peer coaching</strong></li>
+                  <li><strong>Leadership expectations framework</strong></li>
+                  <li><strong>Calibration on delivery health</strong></li>
               </ul>
           </div>
       </div>
 
       <div class="content-section">
           <div class="section-label">Capability Building</div>
-          <h2 class="section-title">Technical Leadership</h2>
+          <h2 class="section-title">Growing Technical Leadership</h2>
           <div class="section-content">
               <ul>
-                  <li>Career ladders</li>
-                  <li>Staff / Principal communities</li>
-                  <li>Coaching programs</li>
-                  <li>Internal training</li>
+                  <li><strong>Career ladders</strong></li>
+                  <li><strong>Staff / Principal communities</strong></li>
+                  <li><strong>Coaching programs</strong></li>
+                  <li><strong>Internal training</strong></li>
               </ul>
           </div>
       </div>
 
       <div class="content-section">
-          <div class="section-label">Director Focus Areas</div>
-          <h2 class="section-title">Strategic Priorities</h2>
+          <div class="section-label">Director Focus</div>
+          <h2 class="section-title">Strategic Leadership Priorities</h2>
           <div class="section-content">
               <ul>
-                  <li>System health</li>
-                  <li>Org design</li>
-                  <li>Talent density</li>
-                  <li>Strategic bets</li>
-                  <li>Removing structural bottlenecks</li>
+                  <li><strong>System health</strong></li>
+                  <li><strong>Org design</strong></li>
+                  <li><strong>Talent density</strong></li>
+                  <li><strong>Strategic bets</strong></li>
+                  <li><strong>Removing structural bottlenecks</strong></li>
               </ul>
           </div>
       </div>
 
   - label: "Rollout"
     title: "Change & Rollout Strategy"
-    subtitle: "12–18 month transformation"
+    subtitle: "12–18 month transformation approach"
     content: |
       <div class="content-section">
           <div class="section-label">Incremental Rollout</div>
-          <h2 class="section-title">Phased Approach</h2>
+          <h2 class="section-title">Three-Phase Approach</h2>
           <div class="timeline">
               <div class="timeline-item">
                   <div class="timeline-date">Phase 1</div>
                   <div class="timeline-title">Discover</div>
-                  <div class="timeline-desc">Start with pilot domains, validate with metrics</div>
+                  <div class="timeline-desc">Start with pilot domains, map context, validate approach</div>
               </div>
               <div class="timeline-item">
                   <div class="timeline-date">Phase 2</div>
                   <div class="timeline-title">Stabilize</div>
-                  <div class="timeline-desc">Refine processes, build platform capabilities</div>
+                  <div class="timeline-desc">Validate with metrics, refine processes, build platform capabilities</div>
               </div>
               <div class="timeline-item">
                   <div class="timeline-date">Phase 3</div>
                   <div class="timeline-title">Scale</div>
-                  <div class="timeline-desc">Expand gradually, share learnings</div>
+                  <div class="timeline-desc">Expand gradually, continuous improvement, share learnings</div>
               </div>
           </div>
       </div>
@@ -325,27 +322,27 @@ slides:
           <h2 class="section-title">Continuous Adaptation</h2>
           <div class="section-content">
               <ul>
-                  <li>Quarterly reviews</li>
-                  <li>Health metrics dashboards</li>
-                  <li>Retrospectives at org level</li>
+                  <li><strong>Quarterly reviews</strong></li>
+                  <li><strong>Health metrics dashboards</strong></li>
+                  <li><strong>Retrospectives at org level</strong></li>
               </ul>
           </div>
       </div>
 
       <div class="content-section">
           <div class="section-label">Communication</div>
-          <h2 class="section-title">Transparency</h2>
+          <h2 class="section-title">Transparent Change Management</h2>
           <div class="section-content">
               <ul>
-                  <li>Clear intent</li>
-                  <li>Transparent progress</li>
-                  <li>Shared learnings</li>
+                  <li><strong>Clear intent</strong></li>
+                  <li><strong>Transparent progress</strong></li>
+                  <li><strong>Shared learnings</strong></li>
               </ul>
           </div>
       </div>
 
   - label: "Outcomes"
-    title: "Outcomes"
+    title: "Measurable Outcomes"
     subtitle: "Results across three dimensions"
     content: |
       <div class="stats-grid">
@@ -356,24 +353,24 @@ slides:
 
       <div class="content-section">
           <div class="section-label">Organizational</div>
-          <h2 class="section-title">Org Outcomes</h2>
+          <h2 class="section-title">Organizational Outcomes</h2>
           <div class="section-content">
               <ul>
-                  <li>Predictable delivery</li>
-                  <li>Clear ownership</li>
-                  <li>Lower leadership load</li>
+                  <li><strong>Predictable delivery</strong></li>
+                  <li><strong>Clear ownership</strong></li>
+                  <li><strong>Lower leadership load</strong></li>
               </ul>
           </div>
       </div>
 
       <div class="content-section">
           <div class="section-label">Technical</div>
-          <h2 class="section-title">Tech Outcomes</h2>
+          <h2 class="section-title">Technical Outcomes</h2>
           <div class="section-content">
               <ul>
-                  <li>Safer deployments</li>
-                  <li>Reduced coupling</li>
-                  <li>Higher reliability</li>
+                  <li><strong>Safer deployments</strong></li>
+                  <li><strong>Reduced coupling</strong></li>
+                  <li><strong>Higher reliability</strong></li>
               </ul>
           </div>
       </div>
@@ -383,9 +380,9 @@ slides:
           <h2 class="section-title">People Outcomes</h2>
           <div class="section-content">
               <ul>
-                  <li>Higher engagement</li>
-                  <li>Faster onboarding</li>
-                  <li>Strong internal mobility</li>
+                  <li><strong>Higher engagement</strong></li>
+                  <li><strong>Faster onboarding</strong></li>
+                  <li><strong>Strong internal mobility</strong></li>
               </ul>
           </div>
       </div>
@@ -410,12 +407,5 @@ slides:
       <div class="highlight-box">
           <div class="highlight-title">💬 Want to Discuss Your Scaling Challenge?</div>
           <p>I'm happy to share more details or discuss how similar approaches might work for your organization.</p>
-      </div>
-
-      <div class="content-section">
-          <div class="section-label">Get in Touch</div>
-          <div class="section-content">
-              <p><a href="mailto:daniel@suszczynski.dev">daniel@suszczynski.dev</a> · <a href="https://linkedin.com/in/suszczynski">LinkedIn</a></p>
-          </div>
       </div>
 ---

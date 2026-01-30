@@ -59,20 +59,6 @@
   </url>
   
   <url>
-    <loc>http://0.0.0.0:4000/case-studies/scaling-engineering-organizations-v1/</loc>
-    <lastmod>2026-01-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>http://0.0.0.0:4000/case-studies/scaling-engineering-organizations-v2/</loc>
-    <lastmod>2026-01-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
     <loc>http://0.0.0.0:4000/case-studies/scaling-engineering-organizations/</loc>
     <lastmod>2026-01-30</lastmod>
     <changefreq>monthly</changefreq>
