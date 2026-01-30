@@ -1,1 +1,29 @@
+# Jekyll build output
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby/Bundler
+vendor/
+.bundle/
+Gemfile.lock
+
+# IDE
 /.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+**/.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak

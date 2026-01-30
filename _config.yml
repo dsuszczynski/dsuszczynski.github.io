@@ -50,3 +50,7 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+
+# Include hidden folders
+include:
+  - .well-known
