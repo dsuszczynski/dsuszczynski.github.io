@@ -163,6 +163,7 @@ no_canvas: true
     function goToSlide(index) {
         currentSlide = Math.max(0, Math.min(totalSlides - 1, index));
         updateUI();
+        window.scrollTo(0, 0);
     }
 
     function nextSlide() { goToSlide(currentSlide + 1); }
