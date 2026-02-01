@@ -9,28 +9,28 @@ layout: null
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  {% for page in site.pages %}{% if page.url != '/404.html' and page.url != '/sitemap.xml' and page.url != '/robots.txt' %}
+{% for page in site.pages %}{% unless page.url == '/' or page.url == '/index.html' or page.url == '/404.html' or page.url == '/sitemap.xml' or page.url == '/robots.txt' or page.url contains '/assets/' %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
     <lastmod>{{ site.time | date: '%Y-%m-%d' }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  {% endif %}{% endfor %}
-  {% for article in site.articles %}
+{% endunless %}{% endfor %}
+{% assign sorted_articles = site.articles | sort: 'date' | reverse %}{% for article in sorted_articles %}
   <url>
     <loc>{{ site.url }}{{ article.url }}</loc>
     <lastmod>{{ article.date | date: '%Y-%m-%d' }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  {% endfor %}
-  {% for case_study in site.case_studies %}
+{% endfor %}
+{% assign sorted_case_studies = site.case_studies | sort: 'date' | reverse %}{% for case_study in sorted_case_studies %}
   <url>
     <loc>{{ site.url }}{{ case_study.url }}</loc>
     <lastmod>{{ case_study.date | date: '%Y-%m-%d' }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  {% endfor %}
+{% endfor %}
 </urlset>

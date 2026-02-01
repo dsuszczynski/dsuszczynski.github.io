@@ -4,6 +4,7 @@ no_canvas: true
 ---
 <style>
     body { overflow-x: hidden; }
+    footer { margin-bottom: 80px; }
     
     /* Slide Progress */
     .slide-progress { position: fixed; top: 60px; left: 0; right: 0; z-index: 99; padding: var(--space-sm) var(--space-md); background: rgba(4, 21, 37, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-border); }
@@ -13,8 +14,29 @@ no_canvas: true
     .progress-text { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted); min-width: 80px; text-align: right; }
     
     /* Slides Container */
-    .slides-container { display: flex; transition: transform 0.5s ease; padding-top: 110px; }
-    .slide { min-width: 100vw; display: flex; flex-direction: column; padding-bottom: 100px; }
+    .slides-container {
+        position: relative;
+        padding-top: 110px;
+    }
+    .slide {
+        position: absolute;
+        top: 110px;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+    }
+    .slide.active {
+        position: relative;
+        top: 0;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
     
     /* Slide Header */
     .slide-header { padding: var(--space-lg) var(--space-md); background: var(--color-bg-surface); border-bottom: 1px solid var(--color-border); }
@@ -26,9 +48,20 @@ no_canvas: true
     /* Slide Content */
     .slide-content { overflow-y: auto; padding: var(--space-lg) var(--space-md); }
     .slide-content-inner { max-width: 1000px; margin: 0 auto; }
-    
-    /* Content Sections */
-    .content-section { margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border); }
+
+    /* Content Sections with inline graphics */
+    .content-section { margin-bottom: var(--space-xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--color-border); display: grid; grid-template-columns: 1fr 280px; gap: var(--space-lg); align-items: start; }
+    .content-section.no-graphic { grid-template-columns: 1fr; }
+    .content-section.full-width { grid-template-columns: 1fr; }
+    .section-text { }
+    .section-graphic { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: var(--space-md); background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+    .section-graphic svg { width: 100%; max-width: 240px; height: auto; }
+    .section-graphic .graphic-caption { margin-top: var(--space-sm); font-size: 0.75rem; color: var(--color-text-muted); text-align: center; }
+
+    @media (max-width: 768px) {
+        .content-section { grid-template-columns: 1fr; }
+        .section-graphic { order: -1; margin-bottom: var(--space-md); }
+    }
     .content-section:last-child { border-bottom: none; }
     .section-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-cyan); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-sm); }
     .section-title { font-size: 1.4rem; font-weight: 600; margin-bottom: var(--space-md); }
@@ -59,31 +92,63 @@ no_canvas: true
     .highlight-box { background: var(--color-cyan-soft); border: 1px solid var(--color-border-bright); border-radius: var(--radius-md); padding: var(--space-md); margin: var(--space-lg) 0; }
     .highlight-title { font-weight: 600; color: var(--color-cyan); margin-bottom: var(--space-xs); }
     
-    /* Navigation */
-    .nav-arrows { position: fixed; bottom: var(--space-lg); right: var(--space-lg); display: flex; gap: var(--space-sm); z-index: 100; }
-    .nav-arrow { width: 50px; height: 50px; border-radius: 50%; background: var(--color-bg-surface); border: 1px solid var(--color-border); color: var(--color-text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; }
-    .nav-arrow:hover:not(:disabled) { background: var(--color-cyan); color: var(--color-bg-deep); border-color: var(--color-cyan); box-shadow: 0 0 20px var(--color-cyan-glow); }
-    .nav-arrow:disabled { opacity: 0.3; cursor: not-allowed; }
-    .nav-arrow svg { width: 24px; height: 24px; }
-    
-    .slide-dots { position: fixed; bottom: var(--space-lg); left: 50%; transform: translateX(-50%); display: flex; gap: var(--space-sm); z-index: 100; }
-    .slide-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--color-bg-elevated); border: 1px solid var(--color-border); cursor: pointer; transition: all 0.3s ease; }
-    .slide-dot.active { background: var(--color-cyan); border-color: var(--color-cyan); box-shadow: 0 0 10px var(--color-cyan); }
+    /* Side Navigation Arrows */
+    .nav-side { position: fixed; top: 50%; transform: translateY(-50%); z-index: 100; }
+    .nav-side.nav-prev { left: var(--space-md); }
+    .nav-side.nav-next { right: var(--space-md); }
+    .nav-side-btn {
+        width: 56px;
+        height: 80px;
+        border-radius: var(--radius-md);
+        background: rgba(15, 42, 61, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-primary);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-xs);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .nav-side-btn:hover:not(:disabled) {
+        background: var(--color-cyan);
+        color: var(--color-bg-deep);
+        border-color: var(--color-cyan);
+        box-shadow: 0 0 30px var(--color-cyan-glow);
+    }
+    .nav-side-btn:disabled { opacity: 0.2; cursor: not-allowed; }
+    .nav-side-btn svg { width: 28px; height: 28px; }
+    .nav-side-btn .nav-label { font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Bottom Navigation */
+    .nav-bottom { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; padding: var(--space-md); background: rgba(4, 21, 37, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--color-border); }
+    .nav-bottom-inner { max-width: 600px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: var(--space-lg); }
+
+    .slide-dots { display: flex; gap: var(--space-xs); }
+    .slide-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-bg-elevated); border: 1px solid var(--color-border); cursor: pointer; transition: all 0.3s ease; }
+    .slide-dot.active { background: var(--color-cyan); border-color: var(--color-cyan); box-shadow: 0 0 10px var(--color-cyan); transform: scale(1.2); }
     .slide-dot:hover { border-color: var(--color-cyan); }
-    
-    .keyboard-hints { position: fixed; bottom: var(--space-lg); left: var(--space-lg); display: flex; gap: var(--space-md); z-index: 100; }
-    .key-hint { display: flex; align-items: center; gap: var(--space-xs); font-size: 0.75rem; color: var(--color-text-muted); }
-    .key { font-family: var(--font-mono); padding: 2px 8px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 4px; font-size: 0.7rem; }
+
+    .nav-counter { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted); min-width: 60px; text-align: center; }
+
+    .keyboard-hints { display: flex; gap: var(--space-md); }
+    .key-hint { display: flex; align-items: center; gap: var(--space-xs); font-size: 0.7rem; color: var(--color-text-muted); }
+    .key { font-family: var(--font-mono); padding: 2px 6px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: 3px; font-size: 0.65rem; }
     
     .scroll-indicator { display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); padding: var(--space-md); color: var(--color-text-muted); font-size: 0.8rem; animation: bounce 2s infinite; }
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
     .scroll-indicator svg { width: 24px; height: 24px; }
     
+    @media (max-width: 1100px) {
+        .nav-side { display: none; }
+    }
+
     @media (max-width: 768px) {
         .keyboard-hints { display: none; }
-        .nav-arrows { bottom: var(--space-md); right: var(--space-md); }
-        .slide-dots { bottom: calc(var(--space-md) + 60px); }
         .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        .nav-bottom-inner { gap: var(--space-md); }
     }
 </style>
 
@@ -96,7 +161,7 @@ no_canvas: true
 
 <div class="slides-container" id="slidesContainer">
     {% for slide in page.slides %}
-    <div class="slide" data-slide="{{ forloop.index }}">
+    <div class="slide{% if forloop.first %} active{% endif %}" data-slide="{{ forloop.index }}">
         <div class="slide-header">
             <div class="slide-header-inner">
                 <div class="slide-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }} / {{ slide.label }}</div>
@@ -106,27 +171,36 @@ no_canvas: true
         </div>
         <div class="slide-content">
             <div class="slide-content-inner">
-                {{ slide.content | markdownify }}
+                {{ slide.content }}
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
 
-<div class="slide-dots" id="slideDots"></div>
-
-<div class="nav-arrows">
-    <button class="nav-arrow" id="prevBtn" aria-label="Previous slide">
+<!-- Side Navigation -->
+<div class="nav-side nav-prev">
+    <button class="nav-side-btn" id="prevBtnSide" aria-label="Previous slide">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        <span class="nav-label">Prev</span>
     </button>
-    <button class="nav-arrow" id="nextBtn" aria-label="Next slide">
+</div>
+<div class="nav-side nav-next">
+    <button class="nav-side-btn" id="nextBtnSide" aria-label="Next slide">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        <span class="nav-label">Next</span>
     </button>
 </div>
 
-<div class="keyboard-hints">
-    <div class="key-hint"><span class="key">←</span><span class="key">→</span> Navigate slides</div>
-    <div class="key-hint"><span class="key">↑</span><span class="key">↓</span> Scroll details</div>
+<!-- Bottom Navigation Bar -->
+<div class="nav-bottom">
+    <div class="nav-bottom-inner">
+        <div class="keyboard-hints">
+            <div class="key-hint"><span class="key">←</span><span class="key">→</span> Navigate</div>
+        </div>
+        <div class="slide-dots" id="slideDots"></div>
+        <div class="nav-counter" id="navCounter">1 / {{ page.slides | size }}</div>
+    </div>
 </div>
 
 <script>
@@ -149,14 +223,24 @@ no_canvas: true
     }
 
     function updateUI() {
-        slidesContainer.style.transform = `translateX(-${currentSlide * 100}vw)`;
+        // Update progress bar and counters
         document.getElementById('progressFill').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
         document.getElementById('progressText').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        document.getElementById('navCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+        // Update dots
         document.querySelectorAll('.slide-dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentSlide);
         });
-        document.getElementById('prevBtn').disabled = currentSlide === 0;
-        document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+
+        // Update active slide class - only active slide is in normal flow
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === currentSlide);
+        });
+
+        // Update side navigation buttons
+        document.getElementById('prevBtnSide').disabled = currentSlide === 0;
+        document.getElementById('nextBtnSide').disabled = currentSlide === totalSlides - 1;
         safeUpdateHistory(`#slide-${currentSlide + 1}`);
     }
 
@@ -169,8 +253,8 @@ no_canvas: true
     function nextSlide() { goToSlide(currentSlide + 1); }
     function prevSlide() { goToSlide(currentSlide - 1); }
 
-    document.getElementById('nextBtn').addEventListener('click', nextSlide);
-    document.getElementById('prevBtn').addEventListener('click', prevSlide);
+    document.getElementById('nextBtnSide').addEventListener('click', nextSlide);
+    document.getElementById('prevBtnSide').addEventListener('click', prevSlide);
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight') nextSlide();
         if (e.key === 'ArrowLeft') prevSlide();
