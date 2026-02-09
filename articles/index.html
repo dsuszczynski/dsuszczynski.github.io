@@ -15,9 +15,8 @@ permalink: /articles/
     .article-excerpt { color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--space-sm); }
     .article-tags { display: flex; gap: 8px; flex-wrap: wrap; }
     .article-tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 4px 10px; background: var(--color-cyan-soft); border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-cyan); }
-    .article-visual { background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-surface)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    .article-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, var(--color-cyan-soft) 0%, transparent 50%); }
-    .article-visual svg { width: 64px; height: 64px; color: var(--color-cyan); opacity: 0.6; position: relative; z-index: 1; }
+    .article-visual { display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: var(--space-lg) 0; }
+    .article-visual svg { width: 140px; height: 140px; color: var(--color-cyan); opacity: 0.7; }
     @media (max-width: 768px) { .article-item { grid-template-columns: 1fr; gap: var(--space-sm); } }
 </style>
 
@@ -37,7 +36,7 @@ permalink: /articles/
                 <div class="article-date">{{ article.date | date: "%B %d, %Y" }}</div>
                 {% if article.read_time %}<div class="article-read-time">{{ article.read_time }} min read</div>{% endif %}
                 <div class="article-visual">
-                    {% if article.icon %}{{ article.icon }}{% else %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>{% endif %}
+                    {% if article.icon %}{{ article.icon }}{% else %}{% endif %}
                 </div>
             </div>
             <div class="article-content">

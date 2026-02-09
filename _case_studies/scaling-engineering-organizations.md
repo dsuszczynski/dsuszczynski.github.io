@@ -315,9 +315,6 @@ slides:
                   <ellipse cx="120" cy="140" rx="55" ry="40" fill="none" stroke="#14b8a6" stroke-width="2" stroke-dasharray="5 3"/>
                   <text x="120" y="135" text-anchor="middle" fill="#14b8a6" font-size="10">Identity</text>
                   <text x="120" y="150" text-anchor="middle" fill="#64748b" font-size="8">Domain</text>
-                  <circle cx="70" cy="70" r="8" fill="#22d3ee"/>
-                  <circle cx="170" cy="70" r="8" fill="#f97316"/>
-                  <circle cx="120" cy="140" r="8" fill="#14b8a6"/>
               </svg>
               <div class="graphic-caption">Domain boundaries</div>
           </div>
@@ -373,29 +370,29 @@ slides:
               </div>
           </div>
           <div class="section-graphic">
-              <svg id="graphic-alignment-discovery" viewBox="0 0 240 170" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Double Diamond shape -->
+              <svg id="graphic-alignment-discovery" viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Double Diamond shape (centered: 240px wide, diamonds span 25-215 = 190px, offset +10) -->
                   <!-- First Diamond: Problem Space -->
-                  <path d="M15 70 L60 20 L105 70 L60 120 Z" fill="#0f2a3d" stroke="#22d3ee" stroke-width="2"/>
-                  <text x="60" y="65" text-anchor="middle" fill="#22d3ee" font-size="8">Discover</text>
-                  <text x="60" y="78" text-anchor="middle" fill="#64748b" font-size="7">+ Define</text>
+                  <path d="M25 55 L70 10 L115 55 L70 100 Z" fill="#0f2a3d" stroke="#22d3ee" stroke-width="2"/>
+                  <text x="70" y="50" text-anchor="middle" fill="#22d3ee" font-size="8">Discover</text>
+                  <text x="70" y="63" text-anchor="middle" fill="#64748b" font-size="7">+ Define</text>
 
                   <!-- Second Diamond: Solution Space -->
-                  <path d="M115 70 L160 20 L205 70 L160 120 Z" fill="#0f2a3d" stroke="#14b8a6" stroke-width="2"/>
-                  <text x="160" y="65" text-anchor="middle" fill="#14b8a6" font-size="8">Develop</text>
-                  <text x="160" y="78" text-anchor="middle" fill="#64748b" font-size="7">+ Deliver</text>
+                  <path d="M125 55 L170 10 L215 55 L170 100 Z" fill="#0f2a3d" stroke="#14b8a6" stroke-width="2"/>
+                  <text x="170" y="50" text-anchor="middle" fill="#14b8a6" font-size="8">Develop</text>
+                  <text x="170" y="63" text-anchor="middle" fill="#64748b" font-size="7">+ Deliver</text>
 
                   <!-- Connection arrow -->
-                  <line x1="105" y1="70" x2="115" y2="70" stroke="#64748b" stroke-width="2"/>
+                  <line x1="115" y1="55" x2="125" y2="55" stroke="#64748b" stroke-width="2"/>
 
-                  <!-- Labels -->
-                  <text x="60" y="135" text-anchor="middle" fill="#94a3b8" font-size="7">Problem Space</text>
-                  <text x="160" y="135" text-anchor="middle" fill="#94a3b8" font-size="7">Solution Space</text>
+                  <!-- Labels below diamonds -->
+                  <text x="70" y="115" text-anchor="middle" fill="#94a3b8" font-size="7">Problem Space</text>
+                  <text x="170" y="115" text-anchor="middle" fill="#94a3b8" font-size="7">Solution Space</text>
 
-                  <!-- Feedback loop -->
-                  <path d="M180 120 C200 150, 40 150, 40 120" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 2" fill="none"/>
-                  <polygon points="40,120 35,128 45,128" fill="#f97316"/>
-                  <text x="110" y="158" text-anchor="middle" fill="#f97316" font-size="7">Learn & Iterate</text>
+                  <!-- Feedback loop (wide arc below everything) -->
+                  <path d="M205 100 Q230 180, 120 180 Q10 180, 35 100" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 2" fill="none"/>
+                  <polygon points="35,100 28,110 40,112" fill="#f97316"/>
+                  <text x="120" y="195" text-anchor="middle" fill="#f97316" font-size="7">Learn & Iterate</text>
               </svg>
               <div class="graphic-caption">Double Diamond with feedback loop</div>
           </div>
@@ -516,49 +513,57 @@ slides:
           </div>
           <div class="section-graphic">
               <svg id="graphic-dx-platform" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Platform Team as foundation layer -->
-                  <rect x="15" y="140" width="210" height="35" rx="6" fill="#0f2a3d" stroke="#a855f7" stroke-width="2"/>
+                  <!-- Platform Team as foundation layer (centered) -->
+                  <rect x="20" y="140" width="200" height="35" rx="6" fill="#0f2a3d" stroke="#a855f7" stroke-width="2"/>
                   <text x="120" y="162" text-anchor="middle" fill="#a855f7" font-size="10" font-weight="bold">Platform Team</text>
 
-                  <!-- Capabilities as services flowing upward -->
-                  <rect x="20" y="85" width="38" height="45" rx="4" fill="#0f2a3d" stroke="#22d3ee" stroke-width="1.5"/>
-                  <text x="39" y="105" text-anchor="middle" fill="#22d3ee" font-size="7">CI/CD</text>
-                  <text x="39" y="118" text-anchor="middle" fill="#64748b" font-size="6">Templates</text>
+                  <!-- Capabilities as services (5 modules, centered: total width 190px, start at 25) -->
+                  <rect x="25" y="85" width="36" height="45" rx="4" fill="#0f2a3d" stroke="#22d3ee" stroke-width="1.5"/>
+                  <text x="43" y="105" text-anchor="middle" fill="#22d3ee" font-size="7">CI/CD</text>
+                  <text x="43" y="118" text-anchor="middle" fill="#64748b" font-size="6">Templates</text>
 
-                  <rect x="63" y="85" width="38" height="45" rx="4" fill="#0f2a3d" stroke="#14b8a6" stroke-width="1.5"/>
-                  <text x="82" y="105" text-anchor="middle" fill="#14b8a6" font-size="7">Infra</text>
-                  <text x="82" y="118" text-anchor="middle" fill="#64748b" font-size="6">Modules</text>
+                  <rect x="65" y="85" width="36" height="45" rx="4" fill="#0f2a3d" stroke="#14b8a6" stroke-width="1.5"/>
+                  <text x="83" y="105" text-anchor="middle" fill="#14b8a6" font-size="7">Infra</text>
+                  <text x="83" y="118" text-anchor="middle" fill="#64748b" font-size="6">Modules</text>
 
-                  <rect x="106" y="85" width="38" height="45" rx="4" fill="#0f2a3d" stroke="#f97316" stroke-width="1.5"/>
-                  <text x="125" y="105" text-anchor="middle" fill="#f97316" font-size="7">Observe</text>
-                  <text x="125" y="118" text-anchor="middle" fill="#64748b" font-size="6">Stack</text>
+                  <rect x="105" y="85" width="36" height="45" rx="4" fill="#0f2a3d" stroke="#f97316" stroke-width="1.5"/>
+                  <text x="123" y="105" text-anchor="middle" fill="#f97316" font-size="7">Observe</text>
+                  <text x="123" y="118" text-anchor="middle" fill="#64748b" font-size="6">Stack</text>
 
-                  <rect x="149" y="85" width="38" height="45" rx="4" fill="#0f2a3d" stroke="#64748b" stroke-width="1.5"/>
-                  <text x="168" y="105" text-anchor="middle" fill="#94a3b8" font-size="7">Security</text>
-                  <text x="168" y="118" text-anchor="middle" fill="#64748b" font-size="6">Scan</text>
+                  <rect x="145" y="85" width="36" height="45" rx="4" fill="#0f2a3d" stroke="#64748b" stroke-width="1.5"/>
+                  <text x="163" y="105" text-anchor="middle" fill="#94a3b8" font-size="7">Security</text>
+                  <text x="163" y="118" text-anchor="middle" fill="#64748b" font-size="6">Scan</text>
 
-                  <rect x="192" y="85" width="38" height="45" rx="4" fill="#0f2a3d" stroke="#64748b" stroke-width="1.5"/>
-                  <text x="211" y="105" text-anchor="middle" fill="#94a3b8" font-size="7">Service</text>
-                  <text x="211" y="118" text-anchor="middle" fill="#64748b" font-size="6">Template</text>
+                  <rect x="185" y="85" width="36" height="45" rx="4" fill="#0f2a3d" stroke="#64748b" stroke-width="1.5"/>
+                  <text x="203" y="105" text-anchor="middle" fill="#94a3b8" font-size="7">Service</text>
+                  <text x="203" y="118" text-anchor="middle" fill="#64748b" font-size="6">Template</text>
 
-                  <!-- Stream-aligned teams on top -->
-                  <rect x="30" y="15" width="80" height="38" rx="4" fill="#0f2a3d" stroke="#14b8a6" stroke-width="2"/>
-                  <text x="70" y="32" text-anchor="middle" fill="#14b8a6" font-size="8">Stream Team A</text>
-                  <text x="70" y="45" text-anchor="middle" fill="#64748b" font-size="6">Product</text>
+                  <!-- Stream-aligned teams on top (centered) -->
+                  <rect x="35" y="15" width="75" height="38" rx="4" fill="#0f2a3d" stroke="#14b8a6" stroke-width="2"/>
+                  <text x="72" y="32" text-anchor="middle" fill="#14b8a6" font-size="8">Stream Team A</text>
+                  <text x="72" y="45" text-anchor="middle" fill="#64748b" font-size="6">Product</text>
 
-                  <rect x="130" y="15" width="80" height="38" rx="4" fill="#0f2a3d" stroke="#14b8a6" stroke-width="2"/>
-                  <text x="170" y="32" text-anchor="middle" fill="#14b8a6" font-size="8">Stream Team B</text>
-                  <text x="170" y="45" text-anchor="middle" fill="#64748b" font-size="6">Product</text>
+                  <rect x="130" y="15" width="75" height="38" rx="4" fill="#0f2a3d" stroke="#14b8a6" stroke-width="2"/>
+                  <text x="167" y="32" text-anchor="middle" fill="#14b8a6" font-size="8">Stream Team B</text>
+                  <text x="167" y="45" text-anchor="middle" fill="#64748b" font-size="6">Product</text>
 
-                  <!-- Arrows showing services flowing UP to teams -->
-                  <line x1="39" y1="85" x2="55" y2="53" stroke="#22d3ee" stroke-width="1" stroke-dasharray="3 2"/>
-                  <polygon points="55,55 50,63 58,61" fill="#22d3ee"/>
-                  <line x1="82" y1="85" x2="75" y2="53" stroke="#14b8a6" stroke-width="1" stroke-dasharray="3 2"/>
-                  <polygon points="75,55 70,63 78,61" fill="#14b8a6"/>
-                  <line x1="125" y1="85" x2="155" y2="53" stroke="#f97316" stroke-width="1" stroke-dasharray="3 2"/>
-                  <polygon points="155,55 150,63 158,61" fill="#f97316"/>
-                  <line x1="168" y1="85" x2="175" y2="53" stroke="#64748b" stroke-width="1" stroke-dasharray="3 2"/>
-                  <polygon points="175,55 170,63 178,61" fill="#64748b"/>
+                  <!-- Lines from capabilities to teams (~75% of relations, no arrows) -->
+                  <!-- CI/CD to Team A and Team B -->
+                  <line x1="43" y1="85" x2="55" y2="53" stroke="#a855f7" stroke-width="1" stroke-dasharray="3 2"/>
+                  <line x1="43" y1="85" x2="145" y2="53" stroke="#a855f7" stroke-width="1" stroke-dasharray="3 2"/>
+
+                  <!-- Infra to Team A only -->
+                  <line x1="83" y1="85" x2="72" y2="53" stroke="#a855f7" stroke-width="1" stroke-dasharray="3 2"/>
+
+                  <!-- Observe to Team A and Team B -->
+                  <line x1="123" y1="85" x2="95" y2="53" stroke="#a855f7" stroke-width="1" stroke-dasharray="3 2"/>
+                  <line x1="123" y1="85" x2="155" y2="53" stroke="#a855f7" stroke-width="1" stroke-dasharray="3 2"/>
+
+                  <!-- Security to Team B only -->
+                  <line x1="163" y1="85" x2="167" y2="53" stroke="#a855f7" stroke-width="1" stroke-dasharray="3 2"/>
+
+                  <!-- Service Template to Team B only -->
+                  <line x1="203" y1="85" x2="190" y2="53" stroke="#a855f7" stroke-width="1" stroke-dasharray="3 2"/>
 
                   <!-- Label -->
                   <text x="120" y="72" text-anchor="middle" fill="#a855f7" font-size="6" font-style="italic">self-service APIs</text>
@@ -735,12 +740,12 @@ slides:
           </div>
           <div class="section-graphic">
               <svg id="graphic-leadership-focus" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="120" cy="80" r="55" fill="none" stroke="#22d3ee" stroke-width="2"/>
-                  <circle cx="120" cy="80" r="35" fill="none" stroke="#f97316" stroke-width="2"/>
-                  <circle cx="120" cy="80" r="15" fill="#0f2a3d" stroke="#a855f7" stroke-width="2"/>
-                  <text x="120" y="84" text-anchor="middle" fill="#a855f7" font-size="7">Focus</text>
-                  <text x="120" y="55" text-anchor="middle" fill="#f97316" font-size="8">Strategy</text>
-                  <text x="120" y="25" text-anchor="middle" fill="#22d3ee" font-size="8">System Health</text>
+                  <circle cx="120" cy="85" r="55" fill="none" stroke="#22d3ee" stroke-width="2"/>
+                  <circle cx="120" cy="85" r="35" fill="none" stroke="#f97316" stroke-width="2"/>
+                  <circle cx="120" cy="85" r="15" fill="#0f2a3d" stroke="#a855f7" stroke-width="2"/>
+                  <text x="120" y="89" text-anchor="middle" fill="#a855f7" font-size="7">Focus</text>
+                  <text x="120" y="62" text-anchor="middle" fill="#f97316" font-size="8">Strategy</text>
+                  <text x="120" y="152" text-anchor="middle" fill="#22d3ee" font-size="8">System Health</text>
               </svg>
               <div class="graphic-caption">Strategic focus areas</div>
           </div>
@@ -785,9 +790,9 @@ slides:
                   <circle cx="180" cy="70" r="22" fill="#0f2a3d" stroke="#14b8a6" stroke-width="2"/>
                   <text x="180" y="75" text-anchor="middle" fill="#14b8a6" font-size="14">3</text>
                   <text x="180" y="35" text-anchor="middle" fill="#14b8a6" font-size="9">Scale</text>
-                  <path d="M180 115 C180 140, 60 140, 60 115" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4 2" fill="none"/>
-                  <polygon points="60,115 65,125 55,125" fill="#a855f7"/>
-                  <text x="120" y="158" text-anchor="middle" fill="#a855f7" font-size="7">Iterate & Improve</text>
+                  <path d="M180 92 C180 140, 60 140, 60 92" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4 2" fill="none"/>
+                  <polygon points="60,92 55,102 65,102" fill="#a855f7"/>
+                  <text x="120" y="158" text-anchor="middle" fill="#a855f7" font-size="9">Iterate &amp; Improve</text>
               </svg>
               <div class="graphic-caption">Phased rollout</div>
           </div>
@@ -806,17 +811,47 @@ slides:
               </div>
           </div>
           <div class="section-graphic">
-              <svg id="graphic-rollout-feedback" viewBox="0 0 240 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="120" cy="70" r="45" fill="none" stroke="#22d3ee" stroke-width="2"/>
-                  <path d="M120 25 A45 45 0 0 1 165 70" stroke="#14b8a6" stroke-width="4" fill="none"/>
-                  <path d="M165 70 A45 45 0 0 1 120 115" stroke="#f97316" stroke-width="4" fill="none"/>
-                  <path d="M120 115 A45 45 0 0 1 75 70" stroke="#a855f7" stroke-width="4" fill="none"/>
-                  <path d="M75 70 A45 45 0 0 1 120 25" stroke="#22d3ee" stroke-width="4" fill="none"/>
-                  <circle cx="120" cy="70" r="20" fill="#0f2a3d" stroke="#64748b" stroke-width="2"/>
-                  <text x="120" y="75" text-anchor="middle" fill="#94a3b8" font-size="8">Adapt</text>
-                  <polygon points="120,25 125,35 115,35" fill="#22d3ee"/>
+              <svg id="graphic-rollout-feedback" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Feedback cycle: Measure → Review → Adapt → Implement -->
+                  <!-- Top: Measure -->
+                  <rect x="85" y="10" width="70" height="30" rx="4" fill="#0f2a3d" stroke="#22d3ee" stroke-width="2"/>
+                  <text x="120" y="29" text-anchor="middle" fill="#22d3ee" font-size="8">Measure</text>
+
+                  <!-- Right: Review -->
+                  <rect x="170" y="60" width="60" height="30" rx="4" fill="#0f2a3d" stroke="#14b8a6" stroke-width="2"/>
+                  <text x="200" y="79" text-anchor="middle" fill="#14b8a6" font-size="8">Review</text>
+
+                  <!-- Bottom: Adapt -->
+                  <rect x="85" y="110" width="70" height="30" rx="4" fill="#0f2a3d" stroke="#f97316" stroke-width="2"/>
+                  <text x="120" y="129" text-anchor="middle" fill="#f97316" font-size="8">Adapt</text>
+
+                  <!-- Left: Implement -->
+                  <rect x="10" y="60" width="60" height="30" rx="4" fill="#0f2a3d" stroke="#a855f7" stroke-width="2"/>
+                  <text x="40" y="79" text-anchor="middle" fill="#a855f7" font-size="8">Implement</text>
+
+                  <!-- Arrows connecting the cycle (clockwise, curved, center-aligned) -->
+                  <!-- Measure center: x=120, y=25. Review center: x=200, y=75. Adapt center: x=120, y=125. Implement center: x=40, y=75 -->
+
+                  <!-- Measure → Review (right edge x=155 to top edge y=60) -->
+                  <path d="M155 25 Q200 25, 200 60" stroke="#64748b" stroke-width="1.5" fill="none"/>
+                  <polygon points="200,60 196,52 204,52" fill="#64748b"/>
+
+                  <!-- Review → Adapt (bottom edge y=90 to right edge x=155) -->
+                  <path d="M200 90 Q200 125, 155 125" stroke="#64748b" stroke-width="1.5" fill="none"/>
+                  <polygon points="155,125 163,121 163,129" fill="#64748b"/>
+
+                  <!-- Adapt → Implement (left edge x=85 to bottom edge y=90) -->
+                  <path d="M85 125 Q40 125, 40 90" stroke="#64748b" stroke-width="1.5" fill="none"/>
+                  <polygon points="40,90 36,98 44,98" fill="#64748b"/>
+
+                  <!-- Implement → Measure (top edge y=60 to left edge x=85) -->
+                  <path d="M40 60 Q40 25, 85 25" stroke="#64748b" stroke-width="1.5" fill="none"/>
+                  <polygon points="85,25 77,21 77,29" fill="#64748b"/>
+
+                  <!-- Center label -->
+                  <text x="120" y="75" text-anchor="middle" fill="#64748b" font-size="7">Quarterly</text>
               </svg>
-              <div class="graphic-caption">Continuous improvement</div>
+              <div class="graphic-caption">Feedback loop cycle</div>
           </div>
       </div>
 

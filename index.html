@@ -277,7 +277,6 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
 
 <div class="section-divider"></div>
 
-<!--
 <section id="articles">
     <div class="container">
         <div class="section-header">
@@ -285,14 +284,15 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
             <h2 class="section-title">Latest Articles</h2>
         </div>
         <div class="preview-grid">
-            {% for article in site.articles limit:2 %}
+            {% assign sorted_articles = site.articles | sort: 'date' | reverse %}
+            {% for article in sorted_articles limit:2 %}
             <a href="{{ article.url | relative_url }}" class="article-card animate-on-scroll">
                 <div class="article-card-date">{{ article.date | date: "%B %Y" }}</div>
                 <h3 class="article-card-title">{{ article.title }}</h3>
                 <p class="article-card-excerpt">{{ article.excerpt | strip_html | truncate: 150 }}</p>
-                {% if article.tags %}
+                {% if article.keywords %}
                 <div class="article-card-tags">
-                    {% for tag in article.tags limit:2 %}<span class="article-tag">{{ tag }}</span>{% endfor %}
+                    {% for keyword in article.keywords limit:3 %}<span class="article-tag">{{ keyword }}</span>{% endfor %}
                 </div>
                 {% endif %}
             </a>
@@ -329,7 +329,6 @@ description: Daniel Suszczynski - Senior Engineering Leader. 20 years building h
 </section>
 
 <div class="section-divider"></div>
--->
 
 <section id="contact">
     <div class="container">
