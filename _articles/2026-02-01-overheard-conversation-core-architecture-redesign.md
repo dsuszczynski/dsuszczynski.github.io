@@ -105,3 +105,7 @@ Noticing that a technical system had business consequences nobody was measuring.
 Engineering leadership, at its best, isn't about having the answers. It's about seeing the questions that haven't been asked yet, and then building the teams, the systems, and the trust needed to answer them.
 
 That overheard conversation in a meeting room didn't give me a solution. It gave me something better: the right problem to solve.
+
+---
+
+*This article draws on my experience leading engineering teams at German fintech companies, as detailed in my [LinkedIn profile](https://linkedin.com/in/suszczynski).*

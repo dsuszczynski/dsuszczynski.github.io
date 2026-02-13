@@ -109,3 +109,7 @@ That conference room argument between the engineer and the analyst? By the end o
 ---
 
 *This transformation became a reference project across the organization, but the real success wasn't the migration itself. It was proving that even the most complex, high-stakes initiatives can be delivered through trust, transparency, and genuine collaboration.*
+
+---
+
+*This article draws on my experience leading engineering teams at German fintech companies, as detailed in my [LinkedIn profile](https://linkedin.com/in/suszczynski).*
