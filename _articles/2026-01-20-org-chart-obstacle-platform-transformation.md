@@ -16,7 +16,7 @@ keywords:
   - fintech
   - team alignment
 hero_image: /assets/images/article-platform-transformation.png
-reading_time: 10
+reading_time: 6
 ---
 
 Every week for the first three months of the project, I sat in a room with six department heads. Engineering, Data Science, BI, Product, Infrastructure, Key Account. We had a structured agenda. Everyone gave updates. The meeting ended on time.

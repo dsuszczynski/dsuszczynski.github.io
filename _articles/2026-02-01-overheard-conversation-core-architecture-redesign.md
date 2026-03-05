@@ -14,7 +14,7 @@ keywords:
   - system design
   - partner integrations
 hero_image: /assets/images/article-overheard-conversation.png
-reading_time: 12
+reading_time: 5
 ---
 
 I was not in that meeting for a reason. It was a monthly leadership session with the co-founders. Finance, Sales, Key Account. The kind of room where commercial outcomes are discussed and Engineering is expected to be somewhere else, building things.

@@ -37,7 +37,8 @@ permalink: /articles/
 
 <main class="articles-list">
     <div class="container">
-        {% for article in site.articles %}
+        {% assign sorted_articles = site.articles | sort: "date" | reverse %}
+        {% for article in sorted_articles %}
         <a href="{{ article.url | relative_url }}" class="article-item animate-on-scroll">
             <div class="article-thumbnail">
                 {% if article.hero_image %}
