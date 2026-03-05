@@ -14,6 +14,8 @@ keywords:
   - system design
   - partner integrations
 hero_image: /assets/images/article-overheard-conversation.png
+thumbnail: /assets/images/thumb-overheard-conversation.jpg
+og_image: /assets/images/og-overheard-conversation.png
 reading_time: 5
 ---
 

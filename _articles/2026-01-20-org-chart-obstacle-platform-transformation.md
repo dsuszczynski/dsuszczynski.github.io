@@ -16,6 +16,8 @@ keywords:
   - fintech
   - team alignment
 hero_image: /assets/images/article-platform-transformation.png
+thumbnail: /assets/images/thumb-platform-transformation.jpg
+og_image: /assets/images/og-platform-transformation.png
 reading_time: 6
 ---
 

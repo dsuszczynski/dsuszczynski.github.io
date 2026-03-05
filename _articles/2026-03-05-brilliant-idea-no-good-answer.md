@@ -14,6 +14,8 @@ keywords:
   - product validation
   - startup
 hero_image: /assets/images/article-brilliant-idea.png
+thumbnail: /assets/images/thumb-brilliant-idea.jpg
+og_image: /assets/images/og-brilliant-idea.png
 reading_time: 6
 ---
 

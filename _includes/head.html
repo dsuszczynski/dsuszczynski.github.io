@@ -20,7 +20,7 @@
 <meta property="og:description" content="{{ page.description | default: site.description }}">
 <meta property="og:type" content="{% if page.layout == 'case-study' %}article{% elsif page.layout == 'article' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta property="og:image" content="{% if page.hero_image %}{{ site.url }}{{ page.hero_image }}{% else %}{{ site.url }}/og-image.png{% endif %}">
+<meta property="og:image" content="{% if page.og_image %}{{ site.url }}{{ page.og_image }}{% elsif page.hero_image %}{{ site.url }}{{ page.hero_image }}{% else %}{{ site.url }}/og-image.png{% endif %}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="{{ site.title }}">
@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page.title | default: site.title }}">
 <meta name="twitter:description" content="{{ page.description | default: site.description }}">
-<meta name="twitter:image" content="{% if page.hero_image %}{{ site.url }}{{ page.hero_image }}{% else %}{{ site.url }}/og-image.png{% endif %}">
+<meta name="twitter:image" content="{% if page.og_image %}{{ site.url }}{{ page.og_image }}{% elsif page.hero_image %}{{ site.url }}{{ page.hero_image }}{% else %}{{ site.url }}/og-image.png{% endif %}">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
