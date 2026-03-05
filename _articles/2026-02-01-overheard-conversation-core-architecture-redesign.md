@@ -1,9 +1,9 @@
 ---
-title: "How an Overheard Conversation Led Me to Redesign a Company's Core Architecture"
+title: "The Conversation I Wasn't Supposed to Hear"
 slug: overheard-conversation-core-architecture-redesign
 date: 2026-02-01
 description: "A case study on how noticing a business problem led to redesigning a partner matching architecture, reducing API load by 40-60% and improving commercial outcomes."
-excerpt: "Sometimes the most impactful engineering work starts not with a ticket, but with a question nobody thought to ask."
+excerpt: "I was not in that meeting for a reason. It was a monthly leadership session with the co-founders. I happened to be nearby. And what I heard changed how I thought about our entire architecture."
 keywords:
   - engineering leadership
   - architecture redesign
@@ -13,99 +13,86 @@ keywords:
   - API optimization
   - system design
   - partner integrations
+hero_image: /assets/images/article-overheard-conversation.png
 reading_time: 12
 ---
 
-*Sometimes the most impactful engineering work starts not with a ticket, but with a question nobody thought to ask.*
+I was not in that meeting for a reason. It was a monthly leadership session with the co-founders. Finance, Sales, Key Account. The kind of room where commercial outcomes are discussed and Engineering is expected to be somewhere else, building things.
+
+I happened to be nearby. I heard a Key Account Manager explain to one of the co-founders why a competitor was winning better commission terms from partner banks. The answer had nothing to do with stronger relationships or better salespeople. It was lower operational burden per converted customer. Banks preferred working with them because they were easier to work with.
+
+I kept quiet. But on the way back to my desk, I already knew what I was going to change.
 
 ---
 
-There's a moment every engineer knows, the one where a casual observation suddenly reframes everything you thought you understood about the system you've been building. For me, that moment happened while walking past a meeting room at a leading German digital lending platform where I worked. I overheard a co-founder and a senior Key Account Manager discussing a frustrating reality: competitors were landing better commission deals with partner banks, not because they had superior technology, but because they generated less operational noise.
+## Why We Were Generating Noise
 
-That single sentence changed the trajectory of my work for the next year.
+When I became Head of Engineering for the Core Bank Integration and Matching domain at a leading German fintech, I inherited a system that made sense in isolation but didn't hold up when you looked at it from the outside.
 
-## The Machine That Shouted at Everyone
+The logic was simple: when a customer submitted a loan request, the backend triggered calls to as many partner bank APIs as possible, in parallel, sorted by a basic score. We waited for responses. We collected offers. We showed results. More calls meant more offers. More offers seemed better.
 
-At the time, I was Head of Engineering for the company's Core Bank Integration domain. My mandate was clear: keep the integrations between our platform and dozens of financial institutions fast, stable, and accurate. And we did. The pipes worked. Data flowed. Banks responded.
+From Engineering's perspective, the system was doing its job. Fast, scalable, high throughput.
 
-But *how* they responded, and what we were asking of them, was a different story entirely.
+From a bank's perspective, we were sending them customers who had no realistic chance of approval. Dozens of requests per day consuming their infrastructure, their capacity, the time of people reviewing edge cases, and all of it generating work that never converted into revenue for them.
 
-Every time a customer submitted a loan request, our backend did what it had always done: it fired API calls to as many partner banks as possible, all at once, ordered by a simplistic scoring heuristic. The system waited as long as it could for responses, retried without strategy, and made no meaningful distinction between a bank likely to approve a customer and one that had been rejecting similar profiles for months.
+We were optimising for output, not for outcome.
 
-Imagine walking into a room of thirty people and shouting your question at all of them simultaneously, then waiting to see who answers first. That was our rule engine. It *worked*, in the narrowest sense of the word. But it was blunt, wasteful, and increasingly damaging.
+That is the heartbeat of everything that followed.
 
-Partner banks were drowning in low-quality traffic. Customers were waiting too long for offers that sometimes never came. And commercially, the company was losing leverage at the negotiation table because every converted customer came wrapped in a thick layer of operational burden.
+---
 
-The irony was hard to miss: the system designed to connect customers with the right bank was actively making that connection harder for everyone involved.
+## The Reframe That Mattered More Than the Architecture
 
-## Reframing the Problem
+What the overheard conversation made clear to me was not a technical problem. It was a framing problem. Engineering had always treated the matching engine as infrastructure. Keep it stable, keep it fast, make sure the calls go through. Commercial outcomes were someone else's responsibility.
 
-Here's the thing about engineering cultures. We tend to optimise within the boundaries we're given. Bank integrations were my responsibility. Bank commissions were not. The rule-based matching logic sat in a grey zone, technically owned by Engineering but commercially governed by product and partnerships. Nobody had connected the dots between *how* we called partner APIs and *how much revenue* those calls ultimately generated.
+But the commercial outcomes ran entirely on our pipes. Every commission negotiation happened in the shadow of the traffic we generated. The quality of our calls was the quality of our relationships with banks. We had been treating a business problem as if it were outside our domain.
 
-Once I saw the connection, I couldn't unsee it.
+I brought this framing to the Key Account lead and to the co-founders, not as a proposal, but as a question. What if we measured the matching engine not by throughput, but by the ratio of meaningful calls to total calls? What would change?
 
-I started asking a different question: *What if we stopped treating partner calls as a commodity and started treating them as a strategic resource?* What if, instead of spraying requests everywhere and filtering the wreckage afterward, we predicted which banks would actually say yes, and only called those?
+That question started the project.
 
-The idea was simple. The execution would not be.
+---
 
-## Designing With Intent
+## What We Actually Built
 
-I pulled together a cross-functional coalition, my engineering teams, the Data Science group, and Key Account Management, and proposed a fundamental redesign of the rule-based matching architecture. Not a refactor. Not an optimisation pass. A rethinking of the core assumption that had governed the system since its inception.
+The old logic was: call everyone and filter the results.
 
-We established three design principles early, and they became our compass throughout the project:
+The new logic was: predict, prioritise, and call with intent.
 
-**Call only the right partners.** Every API request should be justified by data, not by default. If historical patterns showed a bank consistently rejected a particular customer profile, that call should never happen.
+Together with my team and in close collaboration with Data Science, we redesigned the orchestration layer of the matching engine. Instead of sorting partners by a simple score, we introduced sequencing based on predicted acceptance probability. Partners with a proven track record of converting similar customer profiles were called first. Partners with poor performance on specific segments were deprioritised or deferred.
 
-**Respect everyone's time.** Customers shouldn't wait for banks that won't respond. Banks shouldn't process applications they'll never approve. Dynamic timeouts, calibrated per partner based on real performance data, replaced the old one-size-fits-all waiting periods.
+We introduced dynamic timeouts calibrated per partner, based on their historical response behaviour. We added availability checks before calls. We built fallback paths for partners that were degraded or offline, so customer waiting time was not wasted on systems that could not respond. We designed retry logic that deferred rather than immediately repeated failed calls.
 
-**Let the system learn.** Static rules age poorly. We needed a feedback loop, a living architecture where every interaction made the next one smarter.
+The system stopped broadcasting. It started making decisions.
 
-## Building the Orchestration Engine
+For non-technical readers, think of it this way. Before, we were sending the same message to an entire crowd and waiting to see who answered. After, we were having a targeted conversation with the right person at the right moment. The crowd was still there. We just stopped shouting at all of them at once.
 
-What followed was months of methodical, iterative engineering. We dismantled the monolithic rule engine and rebuilt it as a set of purpose-driven microservices, each with a clear responsibility and failure boundary.
+Data Science became a genuine part of this. They consumed structured event data from the new matching flow, processed it through a pipeline built on Kinesis, Glue and Athena, and trained models that fed back into the sequencing logic. The matching engine was not static. It learned. Every call it made became evidence for the next decision.
 
-The new Matching Engine introduced partner sequencing based on predicted acceptance probability, not just a crude score, but a model informed by historical conversion rates, response latency, customer attributes, and even time-of-day patterns. We built partner-availability checks that detected degraded or offline APIs before wasting a call. We replaced aggressive retry storms with intelligent deferment strategies, using delayed-message queues to smooth out load spikes and respect partner capacity.
-
-One of the subtler but most impactful innovations was auto-calibrating result-set sizing. The old rule engine either overwhelmed customers with too many offers or left them with too few. The new logic dynamically determined the optimal number of offers for each customer profile, enough to enable a confident decision, few enough to avoid paralysis.
-
-We also integrated external scoring engines and reverse-engineered partner scoring models to pre-enrich customer profiles before any bank call was made. This alone cut time-to-first-offer to under eight seconds in many cases, a dramatic improvement in an industry where customers often waited several minutes staring at a loading screen.
-
-## The Data Science Partnership
-
-None of this would have worked without a genuine partnership with our Data Science team. Engineering and Data Science often coexist in parallel universes. Same company, different languages, occasional awkward handshakes at all-hands meetings. We needed something deeper.
-
-Together, we designed a shared data contract. Engineering emitted structured event data through Kinesis streams. Data Science consumed those events, processed them through AWS Glue, queried them via Athena, and stored enriched datasets in S3. As data volume grew, they migrated their processing pipelines to Spark, enabling large-scale feature extraction and model retraining without touching the production matching flow.
-
-The beauty of this architecture was its independence. ML models could evolve on their own cadence, retrained, recalibrated, redeployed, without destabilising the customer-facing systems that depended on their output. Engineering and Data Science operated in concert, not in lockstep.
-
-## Shipping Without Breaking Things
-
-Redesigning a system that processes every loan request on the platform is not something you do with a big-bang release and a prayer. We deployed behind feature flags, running the legacy and new flows in parallel. Traffic was ramped gradually, with every increment monitored for API load, conversion behaviour, latency, and partner response quality.
-
-Weekly review cycles with Engineering, Data Science, Product, and Key Account Management kept everyone aligned. We validated assumptions against real-world data, caught regressions early, and reprioritised based on what we actually observed, not what we'd predicted in a planning document months earlier.
-
-This disciplined, iterative approach meant we never had to choose between speed and safety. We moved fast precisely because we'd built the infrastructure to move carefully.
+---
 
 ## What Changed
 
-The numbers told a compelling story. Partner API load dropped by 40 to 60 percent, not because we were doing less, but because we'd stopped doing things that didn't matter. Offer-retrieval success rates climbed as availability checks and delayed retries replaced blind repetition. Customers saw curated, relevant offers faster, and the data showed they made decisions with more confidence.
+The reduction in unnecessary partner API calls landed between 40 and 60 percent. That number is not a projection. It was measured.
 
-But the impact that mattered most wasn't in a dashboard. It was in the conversations.
+Time-to-first-offer dropped for a large share of customers, because we were no longer waiting on slow or unlikely partners while a results screen sat half-loaded. Partner satisfaction improved. Key Account teams had something new to bring into commission negotiations: data showing that the traffic we sent was higher quality. Fewer calls, better conversion ratio. Banks noticed.
 
-Key Account Managers went into partner negotiations armed with data showing exactly how much operational load we had reduced. Banks noticed. Commission terms improved. The relationship shifted from transactional to collaborative.
-
-Inside the company, something else shifted too. Engineering had traditionally been viewed as a support function, the team that kept the lights on and built what Product specified. This project repositioned Engineering as a strategic partner, one that could identify business opportunities, propose solutions, and drive outcomes that showed up on the revenue line.
-
-## The Lesson Behind the Story
-
-Looking back, the most important thing I did wasn't designing the orchestration engine or building the microservice architecture. It was noticing.
-
-Noticing that a technical system had business consequences nobody was measuring. Noticing that the gap between how things worked and how they *should* work was wide enough to drive meaningful change. Noticing that the people closest to the problem, partner managers, data scientists, front-end engineers, each held a piece of the puzzle, but nobody had assembled the picture.
-
-Engineering leadership, at its best, isn't about having the answers. It's about seeing the questions that haven't been asked yet, and then building the teams, the systems, and the trust needed to answer them.
-
-That overheard conversation in a meeting room didn't give me a solution. It gave me something better: the right problem to solve.
+What I am most proud of is not the technical architecture. It is that Engineering stopped being a support function for commercial outcomes and became a contributor to them. That shift did not happen because of the technology. It happened because someone reframed the question.
 
 ---
 
-*This article draws on my experience leading engineering teams at German fintech companies, as detailed in my [LinkedIn profile](https://linkedin.com/in/suszczynski).*
+## What I Would Do Differently
+
+I should have found this problem sooner. The pattern was visible in the data if I had been asking the right questions from the beginning. Call volume per partner, conversion rate per partner, latency per partner. Those metrics existed. Nobody was using them to drive decisions because the commercial and technical tracks were not connected at the working level.
+
+The lesson is not that Engineering should own commercial outcomes. It is that Engineering must understand them well enough to recognise when it is creating problems for them.
+
+The overheard conversation should not have been necessary.
+
+---
+
+Nine months after that hallway moment, the new matching architecture was in production across all partner integrations. Data Science was training models on clean, consistent event data. The system was making decisions, not just processing calls.
+
+I still think about that conversation occasionally. Not because it was dramatic, but because of how much was already possible before I knew to look for it.
+
+The technology was always capable. It was just pointed in the wrong direction.

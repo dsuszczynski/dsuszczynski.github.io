@@ -6,18 +6,25 @@ permalink: /articles/
 ---
 <style>
     .articles-list { padding-bottom: var(--space-2xl); }
-    .article-item { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-lg); padding: var(--space-lg) 0; border-bottom: 1px solid var(--color-border); text-decoration: none; color: inherit; transition: all 0.3s ease; }
+    .article-item { display: grid; grid-template-columns: 280px 1fr; gap: var(--space-lg); padding: var(--space-lg) 0; border-bottom: 1px solid var(--color-border); text-decoration: none; color: inherit; transition: all 0.3s ease; align-items: start; }
     .article-item:hover { background: rgba(0, 212, 255, 0.02); }
     .article-item:hover .article-title { color: var(--color-cyan); }
-    .article-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: var(--space-xs); }
-    .article-read-time { font-size: 0.8rem; color: var(--color-text-muted); }
+    .article-item:hover .article-thumbnail img { transform: scale(1.05); }
+    .article-thumbnail { border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16 / 10; background: var(--color-bg-elevated); border: 1px solid var(--color-border); }
+    .article-thumbnail img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+    .article-thumbnail-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .article-thumbnail-placeholder svg { width: 48px; height: 48px; color: var(--color-text-muted); opacity: 0.3; }
+    .article-meta-info { display: flex; gap: var(--space-md); margin-bottom: var(--space-xs); }
+    .article-date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted); }
+    .article-read-time { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-muted); }
     .article-title { font-size: 1.4rem; font-weight: 600; margin-bottom: var(--space-xs); transition: color 0.3s ease; }
     .article-excerpt { color: var(--color-text-secondary); line-height: 1.7; margin-bottom: var(--space-sm); }
     .article-tags { display: flex; gap: 8px; flex-wrap: wrap; }
     .article-tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 4px 10px; background: var(--color-cyan-soft); border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-cyan); }
-    .article-visual { display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: var(--space-lg) 0; }
-    .article-visual svg { width: 140px; height: 140px; color: var(--color-cyan); opacity: 0.7; }
-    @media (max-width: 768px) { .article-item { grid-template-columns: 1fr; gap: var(--space-sm); } }
+    @media (max-width: 768px) {
+        .article-item { grid-template-columns: 1fr; gap: var(--space-sm); }
+        .article-thumbnail { aspect-ratio: 16 / 9; }
+    }
 </style>
 
 <header class="page-header">
@@ -32,19 +39,25 @@ permalink: /articles/
     <div class="container">
         {% for article in site.articles %}
         <a href="{{ article.url | relative_url }}" class="article-item animate-on-scroll">
-            <div class="article-meta">
-                <div class="article-date">{{ article.date | date: "%B %d, %Y" }}</div>
-                {% if article.read_time %}<div class="article-read-time">{{ article.read_time }} min read</div>{% endif %}
-                <div class="article-visual">
-                    {% if article.icon %}{{ article.icon }}{% else %}{% endif %}
+            <div class="article-thumbnail">
+                {% if article.hero_image %}
+                <img src="{{ article.hero_image | relative_url }}" alt="{{ article.title }}" loading="lazy">
+                {% else %}
+                <div class="article-thumbnail-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                 </div>
+                {% endif %}
             </div>
             <div class="article-content">
+                <div class="article-meta-info">
+                    <span class="article-date">{{ article.date | date: "%B %d, %Y" }}</span>
+                    {% if article.reading_time %}<span class="article-read-time">{{ article.reading_time }} min read</span>{% endif %}
+                </div>
                 <h2 class="article-title">{{ article.title }}</h2>
                 <p class="article-excerpt">{{ article.excerpt | strip_html | truncate: 200 }}</p>
-                {% if article.tags %}
+                {% if article.keywords %}
                 <div class="article-tags">
-                    {% for tag in article.tags %}<span class="article-tag">{{ tag }}</span>{% endfor %}
+                    {% for tag in article.keywords limit:4 %}<span class="article-tag">{{ tag }}</span>{% endfor %}
                 </div>
                 {% endif %}
             </div>

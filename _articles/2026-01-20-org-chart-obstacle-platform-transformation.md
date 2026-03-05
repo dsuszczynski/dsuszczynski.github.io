@@ -1,9 +1,9 @@
 ---
-title: "When the Org Chart Becomes the Obstacle: Leading a High-Stakes Platform Transformation"
+title: "When the Org Chart Becomes the Obstacle"
 slug: org-chart-obstacle-platform-transformation
 date: 2026-01-20
 description: "A leadership case study on navigating cross-functional complexity during a critical platform migration. Learn how breaking down communication silos and establishing clear ownership enabled a zero-incident transformation."
-excerpt: "There's a moment in every complex technical initiative when you realize the technology isn't the hard part."
+excerpt: "Every week for the first three months of the project, I sat in a room with six department heads. The meeting ended on time. And the project was quietly falling apart."
 keywords:
   - engineering leadership
   - platform transformation
@@ -15,101 +15,76 @@ keywords:
   - data migration
   - fintech
   - team alignment
+hero_image: /assets/images/article-platform-transformation.png
 reading_time: 10
 ---
 
-There's a moment in every complex technical initiative when you realize the technology isn't the hard part. For me, that moment came three months into what would become one of the most challenging, and ultimately rewarding, projects of my career.
+Every week for the first three months of the project, I sat in a room with six department heads. Engineering, Data Science, BI, Product, Infrastructure, Key Account. We had a structured agenda. Everyone gave updates. The meeting ended on time.
 
-I was standing in a conference room, watching a backend engineer and a BI analyst argue past each other about a data field. They were both right. They were also both wrong. And the real problem was that they'd never actually talked to each other before that moment. Their managers had been "representing" them in weekly leadership syncs for months.
+And the project was quietly falling apart.
 
-That's when I understood: we didn't have a technical problem. We had a collaboration problem dressed up as a technical one.
-
----
-
-## The Mandate Nobody Wanted
-
-When I took over as Head of Engineering for the Banking & Matching domain, the company was at an inflection point. The company had successfully pivoted from a C2C lending model to B2C loan comparison, but the platform hadn't caught up. We were running a validated business on architecture designed for a different company.
-
-My mandate was deceptively simple on paper: introduce a new domain data schema, decompose our monolith into microservices, and migrate years of sensitive financial data, all while keeping the business running. In practice, this meant touching every function in the technology organization: Engineering, Data Science, BI, Product, Infrastructure, and our external banking partners.
-
-The stakes were high enough that failure would have been measured in lost partnerships and regulatory scrutiny, not just missed deadlines.
+Not because people weren't working. They were. Not because the plan was wrong. It wasn't. The problem was something harder to see from a conference room. Leaders were aligned. The people doing the actual work were drifting apart.
 
 ---
 
-## The Leadership Sync Trap
+## What We Were Actually Trying to Do
 
-I did what most leaders do when facing cross-functional complexity: I set up a weekly meeting with all the department heads. We'd exchange updates, flag dependencies, and leave feeling productive.
+When I became Head of Engineering for the Banking and Matching domain at a leading German fintech, the company was in the middle of a strategic shift. The B2C loan-comparison model was working. But the platform underneath it still reflected the old C2C logic. The data model, the monolithic core, the partner-integration architecture, none of it was built for where the business was going.
 
-Except we weren't.
+The mandate was clear: design a new domain data schema, decompose the monolith into microservices using the Strangler Pattern, and migrate all customer, scoring, and banking data into the new structure without breaking anything along the way. Nine months end-to-end. Financial data. Active bank partnerships. ML models in production. Reports that business teams relied on daily.
 
-Beneath the surface of those polished status reports, teams were interpreting our new data schema differently. Engineers were making assumptions that contradicted what analysts expected. Data scientists were building features on contracts that product managers didn't recognize. Dependencies surfaced weeks after they should have, triggering painful rework cycles.
-
-The irony wasn't lost on me. I'd created a communication structure that actually *prevented* communication. By funneling everything through leadership, I'd turned department heads into translators, and something always got lost in translation.
-
-Worse, when engineers disagreed with decisions their managers had made in those syncs, they had no outlet. The result was passive resistance, low trust, and a project that was slowly grinding to a halt.
+The risk level was not abstract. It was the kind of project where a single misinterpreted data contract could cause incorrect loan matching, partner failures, or compromised analytics. Every team in the technology organisation had a stake in it. And nearly every team had a different interpretation of what "the new schema" actually meant.
 
 ---
 
-## Tearing Down the Walls
+## The Illusion of Alignment
 
-The fix required me to step back from the comfortable role of "leader who attends meetings" and become something messier: a facilitator who got his hands dirty.
+I underestimated this. That is worth saying directly.
 
-With buy-in from department leads, I started organizing working sessions that put the actual practitioners in the same room. BI analysts sat with backend engineers and walked through data mappings line by line. Data scientists worked directly with my team to validate that the new schema would support their ML features. Infrastructure engineers coordinated with microservice developers on deployment patterns.
+My instinct was to create a weekly leadership sync where department heads could coordinate. It seemed logical. If the leaders agreed, the teams would follow. What I did not account for was the gap between what leaders reported and what was actually happening at the implementation level.
 
-These sessions were often uncomfortable. People who'd been frustrated with each other for months suddenly had to work through their disagreements face-to-face. But something remarkable happened: when domain experts talked directly, the "misalignments" that had seemed intractable in leadership meetings often resolved themselves in minutes. Most conflicts weren't actually about substance. They were about missing context.
+BI analysts were adjusting data mappings to fit their reporting needs without coordinating with backend engineers. Data Science was interpreting schema fields based on their ML feature requirements, which sometimes contradicted product definitions. Engineers were making decisions about service contracts without knowing what downstream consumers actually needed. Everyone was working hard. No one was working from the same understanding.
 
-For months, I became what I started calling a "cross-team amplifier." My job was connecting dots, clarifying intent, and making sure no one stayed blocked for more than a few hours. It wasn't glamorous work, but it was the work that mattered.
-
----
-
-## The Fear of Iteration
-
-One of the hardest conversations was about how we'd actually execute the migration. Many stakeholders pushed for a big-bang release. Their logic was understandable: the systems were so intertwined that incremental changes seemed impossible. Better to rip off the bandage.
-
-I disagreed, but I understood the fear behind the position. When you're responsible for ML models that drive loan decisions, or partner integrations that affect millions in revenue, "let's experiment" sounds reckless.
-
-So I proposed a middle path: the Strangler Pattern. We'd build our new microservices and run them in shadow mode for months, processing the same traffic as the legacy monolith. We'd compare outputs obsessively, hunting for inconsistencies. Only after we'd demonstrated behavioral parity would we cut over.
-
-This approach transformed the conversation. Instead of debating whether the new system *would* work, we could watch it working. Fear gave way to empirical confidence. Teams that had been defensive started collaborating on edge cases they'd discovered in the shadow comparisons.
+The leadership meeting was creating an illusion of alignment, because leaders spoke in abstractions. When a Data Science manager said "we aligned on the schema," what actually happened was that two managers exchanged slides. The engineers and analysts who would implement and validate the mapping had not spoken to each other once.
 
 ---
 
-## Making Ownership Explicit
+## What I Changed
 
-Much of the early conflict stemmed from ambiguous ownership. When everyone is responsible for data quality, no one is. When multiple teams can modify a contract, the contract means nothing.
+The shift I made sounds simple. It was not easy to execute.
 
-I worked with stakeholders to define explicit boundaries. Engineering owned orchestration and the microservices themselves. Product owned feature interpretation. Data Science owned model training requirements. BI owned reporting transformation rules. Key Account owned partner-side expectations.
+I stopped running cross-departmental communication through managers and started facilitating direct working sessions between the people closest to the work. With agreement from the department leads, I brought backend engineers into the same room as BI analysts to validate data mappings together. I connected Data Science directly with my team to work through schema interpretation and ensure ML feature consistency. Infrastructure engineers coordinated with microservice developers on service discovery, observability, and deployment patterns.
 
-The shift was subtle but profound. Teams stopped arguing about *who decides* and started collaborating on *how to implement*. Clear ownership didn't create silos. It created interfaces.
+For several months, I operated as what I can only describe as a connector. When a BI analyst had a question about a field definition, I made sure a backend engineer answered it the same day, not the same sprint. When a conflict surfaced between how Data Science and Product interpreted a scoring field, I did not resolve it myself. I brought both teams into the discussion and let them work through it until there was one understanding. My job was not to have the answer. It was to make sure the right people were talking.
 
----
-
-## The Weekend That Wasn't
-
-After six months of microservice development, three months of cross-department alignment, and countless working sessions, we reached the final migration. The actual data cutover happened over a single weekend.
-
-I'd recruited engineers from across departments to staff the execution. The next morning, teams across the company validated reports, ML models, partner integrations, and feature outputs.
-
-The result: zero high-severity incidents. A new data model adopted consistently across every department. A microservice architecture that would support the next phase of growth. And perhaps most importantly, a new pattern of collaboration that outlasted the project itself.
+This changed the entire dynamic. When engineers and analysts worked through a mapping problem together, they both owned the outcome. Passive resistance dissolved. Assumptions that had silently diverged for weeks got surfaced and corrected in hours.
 
 ---
 
-## What I Learned
+## The Strangler Pattern Was Not Just Architecture
 
-Technical transformations fail for technical reasons far less often than we assume. They fail because smart people with good intentions end up working against each other. Not out of malice, but out of missing context and unclear ownership.
+The technical approach we used was the Strangler Pattern. New microservices were built to run in shadow mode, processing identical traffic alongside the monolith without replacing it. Both systems produced outputs. We compared them. We found inconsistencies, investigated them, and resolved them. We did not cut over until full behavioural parity was demonstrated.
 
-The leader's job in these situations isn't to be the smartest person in the room or to make all the decisions. It's to create the conditions where the people closest to the work can actually work together. Sometimes that means tearing down the very communication structures you built. Sometimes it means spending months as a "dot connector" rather than a decision maker.
+There is a reason I describe this as more than an architecture decision. The shadow mode period gave every stakeholder, technical and non-technical, a tangible basis for confidence. Data Science could validate that their ML models produced the same results from the new schema. BI could confirm their reports matched. Key Account could verify partner integrations were stable. Nobody had to take anyone's word for it. The evidence was there, running in parallel, every day for months.
 
-This project taught me that alignment isn't a state you achieve in a kickoff meeting. It's a practice you maintain through hundreds of small interventions, difficult conversations, and deliberate acts of bridge-building.
+It also changed the emotional tone of the project. When teams could see parity building week over week, the pressure of a big-bang release faded. Problem-solving replaced defensive positioning. People stopped protecting their interpretations and started improving the shared one.
 
-It also taught me something about myself: I'm at my best not when I'm directing from above, but when I'm in the middle of things, helping talented people find their way to shared understanding.
-
-That conference room argument between the engineer and the analyst? By the end of the project, they were grabbing coffee together to troubleshoot edge cases. No meeting invite required.
+The actual data migration happened over a single weekend. Engineers from multiple departments volunteered. The following Monday, every team validated their piece. Zero high-severity incidents.
 
 ---
 
-*This transformation became a reference project across the organization, but the real success wasn't the migration itself. It was proving that even the most complex, high-stakes initiatives can be delivered through trust, transparency, and genuine collaboration.*
+## What the Org Chart Was Hiding
+
+There is a pattern I have seen repeated across complex technical initiatives. The org chart looks like an alignment structure, but it is often an obstacle in disguise. When communication runs exclusively through managers, it filters out the nuance that implementation requires. Leaders summarise. They translate. They protect their teams from what they perceive as excessive complexity. In doing so, they sometimes prevent the exact conversations that would make the project work.
+
+The clearest signal that this was happening was the moment I started bringing engineers and analysts directly into design discussions. Several of them immediately said things their managers had not mentioned, questions about specific edge cases, concerns about particular data contracts, observations about timing and sequencing. Not because their managers were hiding anything, but because those details had not survived the translation up and back down the hierarchy.
+
+Getting the people closest to the work into direct contact was not a workaround. It was the actual alignment mechanism.
 
 ---
 
-*This article draws on my experience leading engineering teams at German fintech companies, as detailed in my [LinkedIn profile](https://linkedin.com/in/suszczynski).*
+Nine months after the first schema design, the new data model was consistently adopted across every department. The microservice architecture was running in production. Historical and live data had been migrated. Data Science was training models on cleaner, more consistent data. Partner onboarding improved. The project became a reference point within the company, which I mention not to close with a celebration, but because it matters for the lesson.
+
+The technology delivered because the collaboration structure changed first.
+
+When I look back at the moment I decided to stop running the weekly leadership sync and start connecting the actual implementors, that was not a small process adjustment. That was the decision the project needed. Everything else followed from it.

@@ -27,3 +27,7 @@ ehthumbs.db
 # Temporary files
 *.tmp
 *.bak
+business-card-back.svg
+business-card-front.svg
+BUSINESS-CARD-SPEC.md
+/.claude
