@@ -21,7 +21,7 @@ reading_time: 6
 
 When I recently started coding again with AI-Assisted Development, I did not expect it to bring back memories. But capability changes perspective. And this one surfaced a situation I thought I had already processed.
 
-It was a startup. The kind where everyone sits close enough to overhear each other's calls and the CTO still replies to Slack at midnight. We were three months into the quarter. The team had a clear direction, a short list of outcomes we were chasing, and enough autonomy to find their own path towards them. From the outside it looked like everything was working the way it was supposed to.
+It was a startup. The kind where everyone sits close enough to overhear each other's calls and the CTO still replies to Slack at midnight. We were two months into the quarter. The team had a clear direction, a short list of outcomes we were chasing, and enough autonomy to find their own path towards them. From the outside it looked like everything was working the way it was supposed to.
 
 Then a message arrived from the marketing department. A business stakeholder had an idea. A brilliant one, by their own assessment.
 
@@ -29,7 +29,7 @@ Then a message arrived from the marketing department. A business stakeholder had
 
 ## What We Had Before That Message
 
-I had spent months building a setup where the team did not wait to be told what to build. We were running on OKRs. The commitment was to outcomes, not features. Engineers understood the business problem. They challenged assumptions. They proposed alternatives. When someone came with a solution, the first question was not "how long will this take" but "does this solve the right thing."
+I had spent months shaping a setup where the team did not wait to be told what to build. We were running on OKRs. The commitment was to outcomes, not features. Engineers understood the business problem. They challenged assumptions. They proposed alternatives. When someone came with a solution, the first question was not "how long will this take" but "does this solve the right thing."
 
 When this works, something changes in the room. People stop protecting their backlog and start protecting their focus. They push back on ideas that distract from the objective, not because they are lazy, but because they understand the cost of losing direction mid-quarter. That kind of culture is slow to build and quick to break.
 
@@ -41,7 +41,7 @@ I will not pretend the idea was obviously bad. The problem is that no one knew w
 
 My job was to ask the right questions. What problem does this solve for our customers? Where is the evidence? How does this connect to what we committed to this quarter? I asked. I did not get answers. I got pressure. The escalation moved quickly until it reached a level where asking for validation was indistinguishable from blocking progress.
 
-We implemented it production-ready. That was not wrong on its own. What was wrong was the sequence. We spent full production effort on something whose value had never been tested, and by the end of the quarter we had delivered something no one could point to as a win against the original objectives. The team was intact. The direction was not.
+We implemented it production-ready. That was not wrong on its own. What was wrong was the sequence. We spent full production effort on something whose value had never been tested, and by the end of the quarter we had delivered something no one could point to as a win against the original objectives. The team held together. The quarter's purpose did not.
 
 The brilliant idea turned out to be neither what the business needed nor what we were positioned to validate. I had felt that from the beginning. I had no way to prove it fast enough.
 
@@ -63,7 +63,7 @@ To do that, I needed to be able to build fast. And at that point in my career, I
 
 Recently I came back to coding. Not out of nostalgia, but because AI-Assisted Development made the gap between architecture and implementation disappear in a way I had not expected. With Claude Code and a stack I know well, I can take a moderately complex idea from a conversation to a working prototype in a few days. Not polished. Not production-ready. But real enough to answer the only question that matters at that stage: does this work the way you think it does?
 
-What I did not expect was how quickly this started reframing problems from the past.
+What I did not expect was how quickly this started reframing situations from the past.
 
 When I think about that marketing stakeholder now, I see a different version of the conversation. Not the one where I ask for data I know will not come. Not the one where I agree and watch the quarter collapse. A third one.
 
