@@ -61,7 +61,7 @@ To do that, I needed to be able to build fast. And at that point in my career, I
 
 ## What I Would Do Today
 
-Recently I came back to coding. Not out of nostalgia, but because AI-Assisted Development made the gap between architecture and implementation disappear in a way I had not expected. With Claude Code and a stack I know well, I can take a moderately complex idea from a conversation to a working prototype in a few days. Not polished. Not production-ready. But real enough to answer the only question that matters at that stage: does this work the way you think it does?
+Recently I came back to coding. Not out of nostalgia, but because AI-Assisted Development made the gap between architecture and implementation disappear in a way I had not expected. With Claude Code and a stack I know well, I can take a moderately complex idea from a conversation to a working prototype in a few days. Not something the team built, not something consuming their focus. Something disposable, built for one purpose only: to put the idea in front of a handful of real users and find out whether it solves something they actually care about. That is the question discovery is designed to answer before a single sprint is planned. Is this the right thing to build? Not: did we build it right.
 
 What I did not expect was how quickly this started reframing situations from the past.
 
