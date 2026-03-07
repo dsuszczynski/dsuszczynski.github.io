@@ -71,6 +71,8 @@ Let us prototype it together. This week. You explain the idea, I build a working
 
 The stakeholder gets to see their idea tested before it consumes the team's focus. If the prototype validates the assumption, we have evidence to bring into proper prioritisation. If it does not, the conversation ends based on what we built and ran, not based on whose authority is greater in the room. That is a different kind of pushback. One that does not damage the relationship, because it is not a refusal. It is an answer.
 
+And if the prototype proves the opposite, if real users respond to it and the value is there, then bringing it to the team is no longer a disruption. It is a decision backed by evidence. The team that spent months learning to ask the right questions understands the difference. Conviction is noise. Validated signal is worth stopping for.
+
 A technology leader who can still build has a different kind of conversation with the business. Not a better title or a stronger argument. A working prototype on the table.
 
 ---
