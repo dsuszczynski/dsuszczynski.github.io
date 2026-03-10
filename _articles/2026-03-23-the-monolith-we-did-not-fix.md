@@ -2,7 +2,7 @@
 title: "The Monolith We Did Not Fix"
 slug: the-monolith-we-did-not-fix
 date: 2026-03-23
-description: "A first-hand account of migrating a Python/Django monolith at a German fintech, why the original modularization plan was right but not enough, and what Change Data Capture made possible instead."
+description: "A first-hand account of migrating a Python/Django monolith at a fintech startup, why the original modularization plan was right but not enough, and what Change Data Capture made possible instead."
 excerpt: "My first plan was the right one. That is what made it hard to abandon."
 keywords:
   - monolith migration
@@ -43,7 +43,7 @@ reading_time: 10
 
 My first plan was the right one. That is what made it hard to abandon.
 
-When I joined FinCompare as Head of Engineering in 2023, the platform ran on a Python/Django monolith. FinCompare was building a financial product brokerage platform for SMEs in the German market, connecting small businesses with the right products through a complex matching and application workflow. The platform was working. But it was not keeping up with where the business needed to go. Feature delivery was slow, measured in months where the business expected weeks. The platform's core functionality had performance problems that were not edge cases. Security posture was largely unmeasured.
+When I joined a fintech startup as Head of Engineering, the platform ran on a Python/Django monolith. The company was building a financial product brokerage for SMEs, connecting small businesses with the right products through a complex matching and application workflow. The platform was working. But it was not keeping up with where the business needed to go. Feature delivery was slow, measured in months where the business expected weeks. The platform's core functionality had performance problems that were not edge cases. Security posture was largely unmeasured.
 
 The monolith underneath all of this was deeply entangled. Entities from one business domain were referenced freely inside modules that belonged to completely different ones. Twelve engineers in three teams were sharing a codebase that did not allow any of them to move independently. Every release required coordination. Every change carried the risk of touching something unrelated. I described it to the team as a plate of colourful spaghetti. Each colour was a module. Each domain was a family of colours that belonged together. In a healthy system, the warm colours stay with the warm colours and the cool colours stay with the cool colours. What we had instead was a plate where strands of every colour had woven themselves through every other colour's territory, so thoroughly that in the middle of the plate you could no longer tell which family a strand came from.
 
@@ -134,7 +134,7 @@ The Debezium deployment strategy itself needed adjustment. Running two connector
 
 None of these were blockers. They were the normal friction of applying a tool in a new context. Each problem found a clean resolution, and each solution became part of the shared knowledge the team carried into the next extraction.
 
-By the time the core domain work was complete, around five services had been extracted. The platform's most critical functionality ran entirely outside the monolith's release cycle. Deployments in the core domain moved to on-demand, multiple times a day when the work required it. The performance problems that had been hitting users were resolved. The product overview at the heart of what FinCompare offers to its customers ran on infrastructure that no longer shared a fate with the monolith.
+By the time the core domain work was complete, around five services had been extracted. The platform's most critical functionality ran entirely outside the monolith's release cycle. Deployments in the core domain moved to on-demand, multiple times a day when the work required it. The performance problems that had been hitting users were resolved. The product overview at the heart of what the company offers to its customers ran on infrastructure that no longer shared a fate with the monolith.
 
 ---
 

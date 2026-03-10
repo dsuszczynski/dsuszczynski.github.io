@@ -2,8 +2,8 @@
 title: "The Architecture Did Not Follow the Business"
 slug: architecture-did-not-follow-the-business
 date: 2026-03-16
-description: "A first-hand account of migrating a Java monolith at a major German fintech, from domain discovery to modular extraction to a full microservice ecosystem. The lesson was not technical."
-excerpt: "When I joined smava in 2014, I was handed responsibility for the Banking domain. What I found was a Java monolith with around forty engineers working on it, from six different teams, each pulling in their own direction. My first instinct was to reach for a technical answer. That was the wrong place to start."
+description: "A first-hand account of migrating a Java monolith at a fintech company, from domain discovery to modular extraction to a full microservice ecosystem. The lesson was not technical."
+excerpt: "When I joined a fintech company as the engineer responsible for the Banking domain, I found a Java monolith with around forty engineers working on it, from six different teams, each pulling in their own direction. My first instinct was to reach for a technical answer. That was the wrong place to start."
 keywords:
   - monolith migration
   - microservices
@@ -41,7 +41,7 @@ reading_time: 8
 }
 </style>
 
-When I joined smava in 2014, I was handed responsibility for the Banking domain. What I found was a Java monolith with around forty engineers working on it, from six different teams, each pulling in their own direction. Backend and frontend in one codebase. Two completely different business models sharing the same database. Old data layer frameworks, no meaningful observability, almost no security practices, and entity classes shared so freely across the codebase that changing one thing required understanding everything.
+When I joined a fintech company as the engineer responsible for the Banking domain, I found a Java monolith with around forty engineers working on it, from six different teams, each pulling in their own direction. Backend and frontend in one codebase. Two completely different business models sharing the same database. Old data layer frameworks, no meaningful observability, almost no security practices, and entity classes shared so freely across the codebase that changing one thing required understanding everything.
 
 My first instinct was to reach for a technical answer. That was the wrong place to start.
 
@@ -52,7 +52,7 @@ My first instinct was to reach for a technical answer. That was the wrong place 
 <img src="/assets/images/articles/architecture-did-not-follow-the-business/diagram-before-state.png" alt="The before state: one monolith containing C2C and B2C business models overlapping, sharing the same database" class="article-diagram">
 <p class="article-diagram-caption">Two business models, one codebase, one database. Forty engineers pulling in six directions.</p>
 
-Smava started as a C2C loan platform, customers lending to each other. By the time I arrived, the business had shifted to B2C, a loan comparison platform connecting private customers with bank products. The new model was already proven and growing. But the platform underneath it still carried the full weight of the old one. Customer data, loan application logic, partner integrations, scoring, document management, everything lived inside a single deployable unit originally designed for a business model the company was moving away from.
+The company started as a C2C loan platform, customers lending to each other. By the time I arrived, the business had shifted to B2C, a loan comparison platform connecting private customers with bank products. The new model was already proven and growing. But the platform underneath it still carried the full weight of the old one. Customer data, loan application logic, partner integrations, scoring, document management, everything lived inside a single deployable unit originally designed for a business model the company was moving away from.
 
 The C2C part could not simply be switched off. There were legal obligations, existing customers, active contracts. So both models had to coexist, in the same application, on the same database, with entities shared freely between them.
 
