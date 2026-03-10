@@ -285,8 +285,14 @@ description: Daniel Suszczynski - Engineering Leader building with AI-assisted d
             <h2 class="section-title">Latest Articles</h2>
         </div>
         <div class="preview-grid">
+            {% assign now = site.time | date: "%s" %}
             {% assign sorted_articles = site.articles | sort: 'date' | reverse %}
-            {% for article in sorted_articles limit:2 %}
+            {% assign shown = 0 %}
+            {% for article in sorted_articles %}
+            {% assign article_date = article.date | date: "%s" %}
+            {% if article_date > now %}{% continue %}{% endif %}
+            {% if shown >= 2 %}{% break %}{% endif %}
+            {% assign shown = shown | plus: 1 %}
             <a href="{{ article.url | relative_url }}" class="article-card animate-on-scroll">
                 <div class="article-card-date">{{ article.date | date: "%B %Y" }}</div>
                 <h3 class="article-card-title">{{ article.title }}</h3>

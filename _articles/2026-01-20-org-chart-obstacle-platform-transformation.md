@@ -15,9 +15,9 @@ keywords:
   - data migration
   - fintech
   - team alignment
-hero_image: /assets/images/article-platform-transformation.png
-thumbnail: /assets/images/thumb-platform-transformation.jpg
-og_image: /assets/images/og-platform-transformation.png
+hero_image: /assets/images/articles/org-chart-obstacle-platform-transformation/hero.png
+thumbnail: /assets/images/articles/org-chart-obstacle-platform-transformation/thumb.jpg
+og_image: /assets/images/articles/org-chart-obstacle-platform-transformation/og.png
 reading_time: 6
 ---
 

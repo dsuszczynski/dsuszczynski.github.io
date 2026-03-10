@@ -13,9 +13,9 @@ keywords:
   - team autonomy
   - product validation
   - startup
-hero_image: /assets/images/article-brilliant-idea.png
-thumbnail: /assets/images/thumb-brilliant-idea.jpg
-og_image: /assets/images/og-brilliant-idea.png
+hero_image: /assets/images/articles/brilliant-idea-no-good-answer/hero.png
+thumbnail: /assets/images/articles/brilliant-idea-no-good-answer/thumb.jpg
+og_image: /assets/images/articles/brilliant-idea-no-good-answer/og.png
 reading_time: 6
 ---
 
