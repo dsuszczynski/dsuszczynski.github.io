@@ -98,6 +98,7 @@
 </script>
 {% endif %}
 
+{% if jekyll.environment == "production" %}
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2J1HKS5DV0"></script>
 <script>
@@ -107,3 +108,4 @@
 
     gtag('config', 'G-2J1HKS5DV0');
 </script>
+{% endif %}
