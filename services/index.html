@@ -1,0 +1,208 @@
+---
+layout: default
+title: Services | Fractional CTO & Interim Engineering Leadership
+description: Fractional CTO, interim engineering leadership, engineering organisation assessment, and AI-assisted development strategy. Working with companies across Europe.
+permalink: /services/
+---
+<style>
+    .services-grid { display: flex; flex-direction: column; gap: var(--space-xl); }
+    .service-card { background: rgba(6, 28, 48, 0.5); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-xl); transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--color-cyan), var(--color-teal)); opacity: 0; transition: opacity 0.3s ease; }
+    .service-card:hover { border-color: var(--color-border-bright); }
+    .service-card:hover::before { opacity: 1; }
+    .service-card-header { display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md); }
+    .service-icon { width: 52px; height: 52px; background: var(--color-cyan-soft); border: 1px solid var(--color-border); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--color-cyan); flex-shrink: 0; }
+    .service-title { font-size: 1.4rem; font-weight: 700; margin: 0; }
+    .service-for { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 4px; font-style: italic; }
+    .service-body { color: var(--color-text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: var(--space-md); }
+    .service-details { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+    .service-what h4, .service-fit h4 { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-cyan); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-sm); }
+    .service-list { list-style: none; padding: 0; margin: 0; }
+    .service-list li { position: relative; padding-left: 16px; color: var(--color-text-secondary); font-size: 0.9rem; margin-bottom: 8px; line-height: 1.5; }
+    .service-list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; background: var(--color-cyan); border-radius: 50%; }
+    .service-meta { display: flex; gap: var(--space-lg); margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--color-border); flex-wrap: wrap; }
+    .service-meta-item { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-text-muted); }
+    .service-meta-item strong { color: var(--color-cyan); }
+    .how-section { background: rgba(6, 28, 48, 0.5); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-xl); margin-top: var(--space-xl); }
+    .how-section h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-md); }
+    .how-section p { color: var(--color-text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: var(--space-sm); }
+    .how-section p:last-of-type { margin-bottom: 0; }
+    .services-cta { text-align: center; margin-top: var(--space-xl); }
+    @media (max-width: 768px) {
+        .service-details { grid-template-columns: 1fr; }
+        .service-meta { flex-direction: column; gap: var(--space-sm); }
+    }
+</style>
+
+<header class="page-header">
+    <div class="container">
+        <p class="section-eyebrow">// How I Work</p>
+        <h1 class="page-title">Services</h1>
+        <p class="page-description">I work with companies across Europe as a fractional CTO, interim engineering leader, and strategic advisor. Every engagement starts with understanding the business problem, not the technology.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="services-grid">
+
+        <!-- Fractional CTO -->
+        <div class="service-card animate-on-scroll">
+            <div class="service-card-header">
+                <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                <div>
+                    <h2 class="service-title">Fractional CTO</h2>
+                    <p class="service-for">For companies that need senior technology leadership without a full-time hire.</p>
+                </div>
+            </div>
+            <p class="service-body">You have a growing product, a team that needs direction, and decisions that need someone who has made them before. A fractional CTO gives you 2-3 days a week of the same leadership a full-time CTO would provide, at a fraction of the cost. I stay hands-on in the codebase, review architecture decisions in context, and bring 20 years of building production systems across the full stack to the table.</p>
+            <div class="service-details">
+                <div class="service-what">
+                    <h4>What this looks like</h4>
+                    <ul class="service-list">
+                        <li>Technology strategy and roadmap aligned with business goals</li>
+                        <li>Engineering team structure, hiring, and growth plans</li>
+                        <li>Architecture decisions, build vs buy, vendor evaluation</li>
+                        <li>Board and investor-facing technical narrative</li>
+                        <li>DORA metrics, delivery predictability, quality standards</li>
+                    </ul>
+                </div>
+                <div class="service-fit">
+                    <h4>Best fit</h4>
+                    <ul class="service-list">
+                        <li>Series A-C startups and scale-ups</li>
+                        <li>Companies with 5-40 engineers</li>
+                        <li>Preparing for or recovering from a fundraise</li>
+                        <li>Founders who need a technical equal at the table</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-meta">
+                <div class="service-meta-item"><strong>Typical:</strong> 2-3 days/week, 3-12 months</div>
+                <div class="service-meta-item"><strong>Location:</strong> Remote EU-wide, on-site as needed</div>
+            </div>
+        </div>
+
+        <!-- Interim Head of Engineering -->
+        <div class="service-card animate-on-scroll">
+            <div class="service-card-header">
+                <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div>
+                    <h2 class="service-title">Interim Head of Engineering</h2>
+                    <p class="service-for">For organisations that need hands-on engineering leadership now, not in three months.</p>
+                </div>
+            </div>
+            <p class="service-body">Leadership transitions, post-merger integrations, rapid scaling. Sometimes an organisation needs someone who can step in, stabilise the team, set technical direction, and keep shipping while you find the right permanent hire. I have done this at FinCompare, where I took over the full technology function as interim CTO, reporting to the CEO, and delivered measurable results within months.</p>
+            <div class="service-details">
+                <div class="service-what">
+                    <h4>What this looks like</h4>
+                    <ul class="service-list">
+                        <li>Full engineering leadership, reporting to CEO/CTO</li>
+                        <li>Team stabilisation, morale, and delivery recovery</li>
+                        <li>Organisational design (Team Topologies, DDD)</li>
+                        <li>Platform modernisation and architecture decisions</li>
+                        <li>Hiring process and permanent leadership search support</li>
+                    </ul>
+                </div>
+                <div class="service-fit">
+                    <h4>Best fit</h4>
+                    <ul class="service-list">
+                        <li>Companies in transition or post-merger</li>
+                        <li>Leadership gaps that need bridging</li>
+                        <li>Organisations that need stabilisation before scaling</li>
+                        <li>Teams going through significant technical change</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-meta">
+                <div class="service-meta-item"><strong>Typical:</strong> 3-5 days/week, 3-6 months</div>
+                <div class="service-meta-item"><strong>Location:</strong> Remote EU-wide, regular on-site</div>
+            </div>
+        </div>
+
+        <!-- Engineering Organisation Assessment -->
+        <div class="service-card animate-on-scroll">
+            <div class="service-card-header">
+                <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                <div>
+                    <h2 class="service-title">Engineering Organisation Assessment</h2>
+                    <p class="service-for">For leaders who want an honest outside perspective before making structural decisions.</p>
+                </div>
+            </div>
+            <p class="service-body">A focused 2-4 week engagement where I assess your engineering organisation, architecture, delivery practices, and team structure. You get a written report with specific, actionable recommendations, not a slide deck full of frameworks.</p>
+            <div class="service-details">
+                <div class="service-what">
+                    <h4>What the assessment covers</h4>
+                    <ul class="service-list">
+                        <li>Team structure and domain ownership</li>
+                        <li>Architecture fitness for current and projected scale</li>
+                        <li>Delivery practices, CI/CD maturity, quality standards</li>
+                        <li>Developer experience and friction points</li>
+                        <li>Hiring and talent retention risks</li>
+                        <li>AI readiness and adoption opportunities</li>
+                    </ul>
+                </div>
+                <div class="service-fit">
+                    <h4>Best fit</h4>
+                    <ul class="service-list">
+                        <li>CEOs or CTOs who sense something is off</li>
+                        <li>Companies preparing for a growth phase</li>
+                        <li>Boards that want independent technical due diligence</li>
+                        <li>Pre-acquisition technology assessments</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-meta">
+                <div class="service-meta-item"><strong>Typical:</strong> 2-4 weeks</div>
+                <div class="service-meta-item"><strong>Deliverable:</strong> Written report with recommendations</div>
+            </div>
+        </div>
+
+        <!-- AI-Assisted Development Strategy -->
+        <div class="service-card animate-on-scroll">
+            <div class="service-card-header">
+                <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+                <div>
+                    <h2 class="service-title">AI-Assisted Development Strategy</h2>
+                    <p class="service-for">For engineering leaders who want a grounded perspective on where AI creates genuine leverage, and where it does not.</p>
+                </div>
+            </div>
+            <p class="service-body">I am not selling AI hype. I write code with AI tools every day, building full-stack applications, designing system architecture, and making build-vs-integrate decisions across the stack. The difference: I know where AI accelerates delivery and where it breaks down, because I hit those limits in real codebases, not in demos.</p>
+            <div class="service-details">
+                <div class="service-what">
+                    <h4>What I can help with</h4>
+                    <ul class="service-list">
+                        <li>Assessing where AI-assisted development fits in your workflow</li>
+                        <li>Designing an adoption strategy that does not disrupt delivery</li>
+                        <li>Evaluating AI tooling for your stack and team maturity</li>
+                        <li>Understanding how AI changes the role of senior engineers and code review</li>
+                    </ul>
+                </div>
+                <div class="service-fit">
+                    <h4>Best fit</h4>
+                    <ul class="service-list">
+                        <li>Engineering leaders exploring AI adoption</li>
+                        <li>Teams that want guidance from someone who has done it</li>
+                        <li>Can be standalone or integrated into a fractional CTO engagement</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-meta">
+                <div class="service-meta-item"><strong>Typical:</strong> Advisory, 1-2 day workshops, or ongoing</div>
+                <div class="service-meta-item"><strong>Location:</strong> Remote or on-site</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- How Engagements Work -->
+    <div class="how-section animate-on-scroll">
+        <h3>How Engagements Work</h3>
+        <p>Every engagement starts with a conversation. No pitch, no sales process. We talk about where you are, what you are trying to achieve, and whether I am the right person to help. If I am not, I will tell you.</p>
+        <p>If we decide to work together, the structure is simple: a defined scope and expected outcomes, regular check-ins, async-first communication, monthly invoicing, no long-term lock-in. I work remotely from Berlin, available EU-wide with occasional on-site as needed.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="services-cta">
+        <a href="{{ '/#contact' | relative_url }}" class="btn btn-primary"><span>Book a conversation</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+</div>
