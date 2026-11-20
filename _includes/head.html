@@ -3,6 +3,7 @@
 <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
 <meta name="description" content="{{ page.description | default: site.description }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
+{% if page.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
 {% if page.keywords %}<meta name="keywords" content="{{ page.keywords | join: ', ' }}">{% endif %}
 
 <!-- RSS Feed -->
@@ -72,7 +73,7 @@
   "name": "Daniel Suszczynski",
   "url": "{{ site.url }}",
   "image": "{{ site.url }}/photo.jpg",
-  "jobTitle": "Engineering Leader & Fractional CTO",
+  "jobTitle": "Head of Engineering",
   "description": "{{ site.description }}",
   "email": "{{ site.author.email }}",
   "address": {
@@ -85,8 +86,8 @@
     "https://github.com/{{ site.author.github }}"
   ],
   "knowsAbout": [
-    "Fractional CTO",
-    "Interim Engineering Leadership",
+    "Agentic Engineering",
+    "Developer Experience",
     "Engineering Leadership",
     "Technology Strategy",
     "Organizational Design",
